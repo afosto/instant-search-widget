@@ -6,11 +6,10 @@
     </head>
     <body>
         <button data-af-instant-search>Toggle search</button>
-        <button data-af-instant-search>Toggle search 2</button>
         <input type="search" data-af-instant-search readonly />
         <script>
           document.addEventListener('DOMContentLoaded', function() {
-            window.afostoInstantSearchWidget('movies-demo');
+            AfostoInstantSearchWidget.init('movies-demo');
           });
         </script>
     </body>

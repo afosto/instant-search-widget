@@ -20,9 +20,8 @@ import useClickListener from '../../hooks/useClickListener';
 import useClientSetup from '../../hooks/useClientSetup';
 import isDefined from '../../utils/isDefined';
 
-const Widget = ({ config, searchKey }) => {
+const Widget = ({ config, locale, searchKey, translations }) => {
   const [open, setOpen] = useState(false);
-
   const { client, settings } = useClientSetup(searchKey);
   const [firstIndex] = settings.indexes || [];
   const mainIndexKey = settings.filters?.show_for || firstIndex?.alias;
@@ -41,7 +40,7 @@ const Widget = ({ config, searchKey }) => {
   useClickListener(handleOpen);
 
   return (
-    <WidgetProvider value={{ client, settings }}>
+    <WidgetProvider value={{ client, config, locale, settings, translations }}>
       <DialogOverlay
         className="af-is-widget__dialog"
         isOpen={open}
@@ -58,7 +57,7 @@ const Widget = ({ config, searchKey }) => {
             <div className="af-is-widget__filters">
               <div className="af-is-widget__filters__active-filters">
                 <CurrentRefinements />
-                <ClearRefinements />
+                <ClearRefinements translations={{ reset: translations.filters.reset }} />
               </div>
               <div className="af-is-widget__filters__filters">
                 <DynamicWidgets
@@ -72,6 +71,12 @@ const Widget = ({ config, searchKey }) => {
                         operator="and"
                         limit={filter.options_count || 10}
                         showMoreLimit={filter.max_options_count || 25}
+                        translations={{
+                          noResults: translations.filters.noResults,
+                          showMore: expanded => {
+                            return expanded ? translations.filters.showLess : translations.filters.showMore;
+                          }
+                        }}
                         showMore
                       />
                     </Panel>
