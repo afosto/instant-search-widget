@@ -11,6 +11,10 @@ import HitsPerPage from '../HitsPerPage';
 import Pagination from '../Pagination';
 import SearchBox from '../SearchBox';
 import WidgetProvider from '../WidgetProvider';
+import { LazyMotion, domAnimation, m, AnimatePresence } from "framer-motion"
+
+const MotionDialogOverlay = m(DialogOverlay);
+const MotionDialogContent = m(DialogContent);
 
 const Widget = ({ config, searchKey }) => {
   const [open, setOpen] = useState(false);
@@ -32,27 +36,40 @@ const Widget = ({ config, searchKey }) => {
 
   return (
     <WidgetProvider value={{client, settings}}>
-      <DialogOverlay
-        className="af-is-widget__dialog"
-        isOpen={open}
-        onDismiss={handleClose}
-      >
-        <DialogContent className="af-is-widget__content">
-          <div className="af-is-widget__layout">
-            <CloseButton onClick={handleClose}/>
-            <InstantSearch
-              indexName={mainIndex?.alias}
-              searchClient={client}
-            >
-              <Filters />
-              <SearchBox onClose={handleClose} />
-              <HitsPerPage />
-              <Hits />
-              <Pagination />
-            </InstantSearch>
-          </div>
-        </DialogContent>
-      </DialogOverlay>
+      <LazyMotion features={domAnimation}>
+      <AnimatePresence>
+        {open && (<MotionDialogOverlay
+          initial={{ opacity: 0}}
+          animate={{ opacity: 1, transition: { type: 'tween', duration: .225, ease: [0.4, 0, 0.2, 1] } }}
+          exit={{ opacity: 0, transition: { type: 'tween', duration: .195, ease: [0.4, 0, 0.2, 1] } }}
+          className="af-is-widget__dialog"
+          isOpen
+          key="dialofg"
+          onDismiss={handleClose}
+        >
+          <MotionDialogContent
+            initial={{ y: -20}}
+            animate={{ y: 0, transition: { type: 'tween', duration: .225, ease: [0.4, 0, 0.2, 1] } }}
+            exit={{ y: -20, transition: { type: 'tween', duration: .195, ease: [0.4, 0, 0.2, 1] } }}
+            className="af-is-widget__content">
+            <div className="af-is-widget__layout">
+              <CloseButton onClick={handleClose}/>
+              <InstantSearch
+                indexName={mainIndex?.alias}
+                searchClient={client}
+              >
+                <Filters />
+                <SearchBox onClose={handleClose} />
+                <HitsPerPage />
+                <Hits />
+                <Pagination />
+              </InstantSearch>
+            </div>
+          </MotionDialogContent>
+        </MotionDialogOverlay>
+          )}
+      </AnimatePresence>
+      </LazyMotion>
     </WidgetProvider>
   );
 };
