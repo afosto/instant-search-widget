@@ -1,0 +1,289 @@
+.af-is-widget__slider {
+  padding-left: 12px;
+  padding-right: 12px;
+
+  &__labels {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .rc-slider {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    padding: 5px 0;
+    border-radius: 6px;
+    touch-action: none;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    &-rail {
+      position: absolute;
+      width: 100%;
+      height: 8px;
+      background-color: var(--af-is-gray-50);
+      border-radius: 6px;
+    }
+
+    &-track {
+      position: absolute;
+      height: 8px;
+      background-color: var(--af-is-primary-500);
+      border-radius: 6px;
+    }
+
+    &-handle {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      margin-top: -6px;
+      background: #FFFFFF;
+      border: 1px solid var(--af-is-primary-300);
+      border-radius: 50%;
+      cursor: grab;
+      touch-action: pan-x;
+      transition: border .2s ease, box-shadow .2s ease;
+
+      &-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {
+        border-color: var(--af-is-primary-500);
+        box-shadow: 0 0 0 3px var(--af-is-primary-300);
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px var(--af-is-primary-300);
+        border-color: var(--af-is-primary-500);
+      }
+      &-click-focused:focus {
+        border-color: var(--af-is-primary-500);
+        box-shadow: unset;
+      }
+      &:hover {
+        border-color: var(--af-is-primary-500);
+      }
+      &:active {
+        border-color: #57c5f7;
+        box-shadow: 0 0 5px #57c5f7;
+        cursor: grabbing;
+      }
+    }
+
+    &-mark {
+      position: absolute;
+      top: 18px;
+      left: 0;
+      width: 100%;
+      font-size: 12px;
+
+      &-text {
+        position: absolute;
+        display: inline-block;
+        color: #999;
+        text-align: center;
+        vertical-align: middle;
+        cursor: pointer;
+
+        &-active {
+          color: #666;
+        }
+      }
+    }
+
+    &-step {
+      position: absolute;
+      width: 100%;
+      height: 4px;
+      background: transparent;
+      pointer-events: none;
+    }
+
+    &-dot {
+      position: absolute;
+      bottom: -2px;
+      width: 8px;
+      height: 8px;
+      vertical-align: middle;
+      background-color: #fff;
+      border: 2px solid #e9e9e9;
+      border-radius: 50%;
+      cursor: pointer;
+
+      &-active {
+        border-color: #96dbfa;
+      }
+
+      &-reverse {
+        margin-right: -4px;
+      }
+    }
+
+    &-disabled {
+      background-color: #e9e9e9;
+
+      .rc-slider-track {
+        background-color: #ccc;
+      }
+
+      .rc-slider-handle,
+      .rc-slider-dot {
+        background-color: #fff;
+        border-color: #ccc;
+        box-shadow: none;
+        cursor: not-allowed;
+      }
+
+      .rc-slider-mark-text,
+      .rc-slider-dot {
+        cursor: not-allowed !important;
+      }
+    }
+    &-vertical {
+      width: 14px;
+      height: 100%;
+      padding: 0 5px;
+
+      .rc-slider-rail {
+        width: 4px;
+        height: 100%;
+      }
+
+      .rc-slider-track {
+        bottom: 0;
+        left: 5px;
+        width: 4px;
+      }
+
+      .rc-slider-handle {
+        margin-top: 0;
+        margin-left: -5px;
+        touch-action: pan-y;
+      }
+
+      .rc-slider-mark {
+        top: 0;
+        left: 18px;
+        height: 100%;
+      }
+
+      .rc-slider-step {
+        width: 4px;
+        height: 100%;
+      }
+
+      .rc-slider-dot {
+        margin-left: -2px;
+      }
+    }
+
+    &-tooltip-zoom-down {
+      &-enter,
+      &-appear {
+        display: block !important;
+        animation-duration: 0.3s;
+        animation-fill-mode: both;
+        animation-play-state: paused;
+      }
+
+      &-leave {
+        display: block !important;
+        animation-duration: 0.3s;
+        animation-fill-mode: both;
+        animation-play-state: paused;
+      }
+      &-enter.rc-slider-tooltip-zoom-down-enter-active,
+      &-appear.rc-slider-tooltip-zoom-down-appear-active {
+        animation-name: rcSliderTooltipZoomDownIn;
+        animation-play-state: running;
+      }
+      &-leave.rc-slider-tooltip-zoom-down-leave-active {
+        animation-name: rcSliderTooltipZoomDownOut;
+        animation-play-state: running;
+      }
+      &-enter,
+      &-appear {
+        transform: scale(0, 0);
+        animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+      }
+      &-leave {
+        animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+      }
+    }
+    &-tooltip {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+      visibility: visible;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+      * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      }
+
+      &-hidden {
+        display: none;
+      }
+
+      &-placement-top {
+        padding: 4px 0 8px 0;
+      }
+
+      &-inner {
+        min-width: 24px;
+        height: 24px;
+        padding: 6px 2px;
+        color: #fff;
+        font-size: 12px;
+        line-height: 1;
+        text-align: center;
+        text-decoration: none;
+        background-color: #6c6c6c;
+        border-radius: 6px;
+        box-shadow: 0 0 4px #d9d9d9;
+      }
+      &-arrow {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+      }
+      &-placement-top .rc-slider-tooltip-arrow {
+        bottom: 4px;
+        left: 50%;
+        margin-left: -4px;
+        border-width: 4px 4px 0;
+        border-top-color: #6c6c6c;
+      }
+    }
+  }
+}
+
+@keyframes rcSliderTooltipZoomDownIn {
+  0% {
+    transform: scale(0, 0);
+    transform-origin: 50% 100%;
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1, 1);
+    transform-origin: 50% 100%;
+  }
+}
+@keyframes rcSliderTooltipZoomDownOut {
+  0% {
+    transform: scale(1, 1);
+    transform-origin: 50% 100%;
+  }
+  100% {
+    transform: scale(0, 0);
+    transform-origin: 50% 100%;
+    opacity: 0;
+  }
+}

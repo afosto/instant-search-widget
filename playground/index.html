@@ -2,7 +2,18 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" name="viewport">
         <title>Afosto instant search widget</title>
+        <style>
+            body {
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 40px;
+            }
+        </style>
     </head>
     <body>
         <button data-af-instant-search>Toggle search</button>
@@ -10,7 +21,7 @@
         <input type="search" data-af-instant-search readonly />
         <script>
           document.addEventListener('DOMContentLoaded', function() {
-            window.afostoInstantSearchWidget('movies-demo');
+            window.afostoInstantSearchWidget('multi-index');
           });
         </script>
     </body>
