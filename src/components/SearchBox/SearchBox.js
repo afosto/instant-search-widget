@@ -7,7 +7,6 @@ const SearchBox = ({ onClose }) => {
   const { settings } = useWidgetContext();
   const searchAsYouType = isDefined(settings?.is_autocomplete) ? settings.is_autocomplete : true;
 
-  console.log(settings)
   return (
     <div className="af-is-widget__search">
       <AisSearchBox searchAsYouType={searchAsYouType} autoFocus />

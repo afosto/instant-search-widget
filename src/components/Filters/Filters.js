@@ -20,8 +20,6 @@ const Filters = () => {
         fallbackComponent={RefinementList}
       >
         {filters.map(filter => {
-          console.log(filter)
-
           switch (filter.type) {
             case 'NUMBER':
               return (
