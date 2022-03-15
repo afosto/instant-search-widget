@@ -17,20 +17,21 @@ const Filters = () => {
       <DynamicWidgets
         maxValuesPerFacet={1000} // Suppress warning
         transformItems={(_, {results}) => Object.keys(results._rawResults[0].facets)}
-        fallbackComponent={RefinementList}
+        fallbackComponent={({ attribute }) => <Panel header={attribute}><RefinementList attribute={attribute} limit={10} showMoreLimit={25} /></Panel>}
       >
         {filters.map(filter => {
+          console.log(filter?.label || filter.key)
           switch (filter.type) {
             case 'NUMBER':
               return (
-                <Panel key={filter.key} header={filter.label}>
+                <Panel key={filter.key} header={filter?.label || filter.key}>
                   <RangeSlider attribute={filter.key} />
                 </Panel>
               );
             case 'STRING':
             default:
               return (
-                <Panel key={filter.key} header={filter.label}>
+                <Panel key={filter.key} header={filter?.label || filter.key}>
                   <RefinementList
                     attribute={filter.key}
                     operator="and"
