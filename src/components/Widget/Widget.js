@@ -1,34 +1,28 @@
 import { h } from 'preact';
 import { useCallback, useState } from 'preact/hooks';
-import { DialogOverlay, DialogContent } from '@reach/dialog';
-import {
-  InstantSearch,
-  SearchBox,
-  Hits,
-  Stats,
-  Pagination,
-  HitsPerPage,
-  CurrentRefinements,
-  ClearRefinements,
-  RefinementList,
-  DynamicWidgets,
-  Panel,
-} from "react-instantsearch-dom";
-import Hit from '../Hit';
-import WidgetProvider from '../WidgetProvider';
+import { DialogContent, DialogOverlay } from '@reach/dialog';
+import { LazyMotion, domAnimation, m, AnimatePresence } from "framer-motion"
+import { InstantSearch } from 'react-instantsearch-dom';
 import useClickListener from '../../hooks/useClickListener';
 import useClientSetup from '../../hooks/useClientSetup';
-import isDefined from '../../utils/isDefined';
+import CloseButton from '../CloseButton';
+import Filters from '../Filters';
+import Hits from '../Hits';
+import HitsPerPage from '../HitsPerPage';
+import Pagination from '../Pagination';
+import SearchBox from '../SearchBox';
+import WidgetProvider from '../WidgetProvider';
+
+const MotionDialogOverlay = m(DialogOverlay);
+const MotionDialogContent = m(DialogContent);
 
 const Widget = ({ config, searchKey }) => {
   const [open, setOpen] = useState(false);
 
-  const { client, settings } = useClientSetup(searchKey);
+  const { client, isFetchingSettings, settings } = useClientSetup(searchKey);
   const [firstIndex] = settings.indexes || [];
   const mainIndexKey = settings.filters?.show_for || firstIndex?.alias;
   const mainIndex = (settings.indexes || []).find(index => index.alias === mainIndexKey);
-  const filters = mainIndex?.filters || [];
-  const searchAsYouType = isDefined(settings?.is_autocomplete) ? settings.is_autocomplete : true;
 
   const handleClose = useCallback(() => {
     setOpen(false);
@@ -41,69 +35,40 @@ const Widget = ({ config, searchKey }) => {
   useClickListener(handleOpen);
 
   return (
-    <WidgetProvider value={{ client, settings }}>
-      <DialogOverlay
-        className="af-is-widget__dialog"
-        isOpen={open}
-        onDismiss={handleClose}
-      >
-        <DialogContent className="af-is-widget__content">
-          <InstantSearch
-            indexName={mainIndex?.alias}
-            searchClient={client}
-          >
-            <button className="af-is-widget__close-button" onClick={handleClose}>
-              <span aria-hidden>×</span>
-            </button>
-            <div className="af-is-widget__filters">
-              <div className="af-is-widget__filters__active-filters">
-                <CurrentRefinements />
-                <ClearRefinements />
-              </div>
-              <div className="af-is-widget__filters__filters">
-                <DynamicWidgets
-                  maxValuesPerFacet={1000} // Suppress warning
-                  transformItems={(_, { results }) => Object.keys(results._rawResults[0].facets)}
-                >
-                  {filters.map(filter => (
-                    <Panel key={filter.key} header={filter.label}>
-                      <RefinementList
-                        attribute={filter.key}
-                        operator="and"
-                        limit={filter.options_count || 10}
-                        showMoreLimit={filter.max_options_count || 25}
-                        showMore
-                      />
-                    </Panel>
-                  ))}
-                </DynamicWidgets>
-              </div>
+    <WidgetProvider value={{client, config, isFetchingSettings, settings}}>
+      <LazyMotion features={domAnimation}>
+      <AnimatePresence>
+        {open && (<MotionDialogOverlay
+          initial={{ opacity: 0}}
+          animate={{ opacity: 1, transition: { type: 'tween', duration: .225, ease: [0.4, 0, 0.2, 1] } }}
+          exit={{ opacity: 0, transition: { type: 'tween', duration: .195, ease: [0.4, 0, 0.2, 1] } }}
+          className="af-is-widget__dialog"
+          onDismiss={handleClose}
+          isOpen
+        >
+          <MotionDialogContent
+            initial={{ y: -20}}
+            animate={{ y: 0, transition: { type: 'tween', duration: .225, ease: [0.4, 0, 0.2, 1] } }}
+            exit={{ y: -20, transition: { type: 'tween', duration: .195, ease: [0.4, 0, 0.2, 1] } }}
+            className="af-is-widget__content">
+            <div className="af-is-widget__layout">
+              <CloseButton onClick={handleClose}/>
+              <InstantSearch
+                indexName={mainIndex?.alias}
+                searchClient={client}
+              >
+                <Filters />
+                <SearchBox onClose={handleClose} />
+                <HitsPerPage />
+                <Hits />
+                <Pagination />
+              </InstantSearch>
             </div>
-            <div className="af-is-widget__search">
-              <SearchBox searchAsYouType={searchAsYouType} autoFocus />
-            </div>
-            <div className="af-is-widget__stats">
-              <Stats />
-            </div>
-            <div className="af-is-widget__page-size">
-              <HitsPerPage
-                items={[
-                  { value: 5, label: "Show 5 hits" },
-                  { value: 10, label: "Show 10 hits" },
-                  { value: 25, label: "Show 25 hits" },
-                ]}
-                defaultRefinement={mainIndex?.results_per_page || 10}
-              />
-            </div>
-            <div className="af-is-widget__results">
-              <Hits hitComponent={Hit} />
-            </div>
-            <div className="af-is-widget__pagination">
-              <Pagination />
-            </div>
-          </InstantSearch>
-        </DialogContent>
-      </DialogOverlay>
+          </MotionDialogContent>
+        </MotionDialogOverlay>
+          )}
+      </AnimatePresence>
+      </LazyMotion>
     </WidgetProvider>
   );
 };

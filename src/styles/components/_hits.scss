@@ -1,0 +1,103 @@
+.af-is-widget__results__grid {
+  &.af-is-widget__results__products {
+    .ais-Hits {
+      &-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-gap: 10px;
+        margin: 0;
+
+        @media (min-width: 800px) {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+      &-item {
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        margin: 0;
+        padding: 0;
+
+        &-inner {
+          padding: 16px;
+        }
+
+        a {
+          text-decoration: none;
+        }
+
+        &-image {
+          position: relative;
+          padding-top: 100%;
+          margin-bottom: 16px;
+
+          img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+        }
+
+        &-title {
+          display: block;
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 20px;
+          margin-bottom: 12px;
+          color: var(--af-is-gray-120);
+        }
+
+        &-description {
+          display: -webkit-box;
+          font-weight: 400;
+          font-size: 13px;
+          line-height: 16px;
+          margin-bottom: 12px;
+          color: var(--af-is-gray-120);
+          overflow: hidden;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+        }
+
+        &-price-display {
+          display: block;
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 20px;
+          margin-bottom: 12px;
+          color: var(--af-is-gray-120);
+        }
+
+        &-price-original {
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 20px;
+          margin-left: 8px;
+          color: var(--af-is-gray-90);
+        }
+      }
+    }
+
+  }
+
+  &.af-is-widget__results__pages {
+    .ais-Hits {
+      margin-top: 0;
+      margin-bottom: 0;
+
+      &-item {
+        width: 100%;
+        border: 0;
+        padding: 0;
+
+         a {
+           color: var(--af-is-primary-500);
+         }
+      }
+    }
+  }
+}
