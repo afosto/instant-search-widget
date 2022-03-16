@@ -66,7 +66,7 @@
     "webpack-dev-server": "^4.6.0"
   },
   "dependencies": {
-    "@afosto/instant-search-client": "^1.0.2",
+    "@afosto/instant-search-client": "^1.0.3",
     "@reach/dialog": "^0.16.2",
     "framer-motion": "^6.2.8",
     "preact": "^10.6.6",
