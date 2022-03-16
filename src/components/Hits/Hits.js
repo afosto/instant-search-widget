@@ -23,7 +23,7 @@ const Hits = () => {
               {template}
               <Stats />
             </div>
-            <div className={`af-is-widget__results__grid af-is-widget__results__${template.toLowerCase()}`}>
+            <div className={`af-is-widget__results__grid af-is-widget__results__${template?.toLowerCase()}`}>
               <AisHits hitComponent={hitTemplates[template]} />
             </div>
           </div>
