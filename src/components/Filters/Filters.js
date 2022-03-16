@@ -23,17 +23,19 @@ const Filters = () => {
         )}
       >
         {filters.map(filter => {
+          const header = filter.label || filter.key;
+
           switch (filter.type) {
             case 'NUMBER':
               return (
-                <Panel key={filter.key} header={filter?.label || filter.key}>
+                <Panel key={filter.key} header={header}>
                   <RangeSlider attribute={filter.key} />
                 </Panel>
               );
             case 'STRING':
             default:
               return (
-                <Panel key={filter.key} header={filter?.label || filter.key}>
+                <Panel key={filter.key} header={header}>
                   <RefinementList
                     attribute={filter.key}
                     operator="and"
