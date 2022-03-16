@@ -12,7 +12,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'tmp'),
     filename: 'afosto-instant-search-widget.min.js',
-    library: 'afostoInstantSearchWidget',
+    library: 'AfostoInstantSearchWidget',
     libraryExport: 'default',
     globalObject: 'window',
   },

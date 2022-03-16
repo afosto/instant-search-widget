@@ -1,10 +1,14 @@
 import { h } from 'preact';
 import { ClearRefinements, DynamicWidgets, Panel, RefinementList } from 'react-instantsearch-dom';
+import {
+  DEFAULT_FILTER_MAX_OPTIONS_COUNT,
+  DEFAULT_FILTER_OPTIONS_COUNT
+} from '../../constants';
 import useWidgetContext from '../../hooks/useWidgetContext';
 import RangeSlider from '../RangeSlider';
 
 const Filters = () => {
-  const { settings } = useWidgetContext();
+  const { settings, translations } = useWidgetContext();
   const [firstIndex] = settings.indexes || [];
   const mainIndexKey = settings.filters?.show_for || firstIndex?.alias;
   const mainIndex = (settings.indexes || []).find(index => index.alias === mainIndexKey);
@@ -12,13 +16,16 @@ const Filters = () => {
 
   return (
     <div className="af-is-widget__filters">
-      <ClearRefinements/>
+      <ClearRefinements translations={{ reset: translations.filters.reset }} />
       <DynamicWidgets
         maxValuesPerFacet={1000} // Suppress warning
         transformItems={(_, {results}) => Object.keys(results._rawResults[0].facets)}
         fallbackComponent={({ attribute }) => (
           <Panel header={attribute}>
-            <RefinementList attribute={attribute} limit={10} showMoreLimit={25} />
+            <RefinementList
+              attribute={attribute}
+              limit={DEFAULT_FILTER_OPTIONS_COUNT}
+              showMoreLimit={DEFAULT_FILTER_MAX_OPTIONS_COUNT} />
           </Panel>
         )}
       >
@@ -39,8 +46,12 @@ const Filters = () => {
                   <RefinementList
                     attribute={filter.key}
                     operator="and"
-                    limit={filter.options_count || 10}
-                    showMoreLimit={filter.max_options_count || 25}
+                    limit={filter.options_count || DEFAULT_FILTER_OPTIONS_COUNT}
+                    showMoreLimit={filter.max_options_count || DEFAULT_FILTER_MAX_OPTIONS_COUNT}
+                    translations={{
+                      noResults: translations.filters.noResults,
+                      showMore: expanded => translations.filters[expanded ? 'showLess' : 'showMore']
+                    }}
                     showMore
                   />
                 </Panel>

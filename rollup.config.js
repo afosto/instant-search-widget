@@ -1,10 +1,11 @@
 import { resolve } from "path"
 import { nodeResolve } from '@rollup/plugin-node-resolve';
-import { terser } from 'rollup-plugin-terser';
 import alias from '@rollup/plugin-alias';
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
+import copy from 'rollup-plugin-copy'
 import postcss from "rollup-plugin-postcss";
+import { terser } from 'rollup-plugin-terser';
 
 const INPUT = 'src/index.js';
 
@@ -41,6 +42,15 @@ module.exports = [
         presets: [['@babel/preset-env', { modules: false, useBuiltIns: 'usage', corejs: 3 }], ['@babel/preset-react']],
       }),
       terser(),
+      copy({
+        targets: [
+          { src: 'src/i18n/**/*', dest: 'dist/i18n', transform(content) {
+            return content
+              .toString()
+              .replace("import AfostoInstantSearchWidget from '../AfostoInstantSearchWidget';", "// Load this after the AfostoInstantSearchWidget");
+          } },
+        ],
+      }),
     ],
     output: {
       file: `dist/afosto-instant-search-widget.min.js`,
