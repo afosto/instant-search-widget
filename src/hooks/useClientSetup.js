@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'preact/hooks';
 import afostoInstantSearch from '@afosto/instant-search-client';
+import formatSettings from '../utils/formatSettings';
 
 const useClientSetup = (key) => {
   const [client, setClient] = useState(null);
@@ -7,10 +8,15 @@ const useClientSetup = (key) => {
   const [settings, setSettings] = useState({});
 
   const fetchSettings = useCallback(async () => {
-    setIsFetchingSettings(true);
-    const settings = await client.getSettings();
-    setSettings(settings);
-    setIsFetchingSettings(false);
+    try {
+      setIsFetchingSettings(true);
+      const settings = await client.getSettings();
+      setSettings(formatSettings(settings));
+    } catch (error) {
+      setSettings({});
+    } finally {
+      setIsFetchingSettings(false);
+    }
   }, [client]);
 
   useEffect(() => {
