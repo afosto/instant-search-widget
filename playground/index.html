@@ -2,14 +2,29 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" name="viewport">
         <title>Afosto instant search widget</title>
+        <style>
+            body > div {
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 40px;
+                margin: 0;
+            }
+        </style>
     </head>
     <body>
+    <div>
+
         <button data-af-instant-search>Toggle search</button>
         <input type="search" data-af-instant-search readonly />
+    </div>
         <script>
           document.addEventListener('DOMContentLoaded', function() {
-            AfostoInstantSearchWidget.init('movies-demo');
+            window.afostoInstantSearchWidget('multi-index');
           });
         </script>
     </body>

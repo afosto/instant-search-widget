@@ -61,7 +61,7 @@ module.exports = [
   },
   {
     input: INPUT,
-    external: ['classnames', 'preact', 'preact/hooks', 'prop-types', 'react-fast-compare', 'algoliasearch-helper'],
+    external: ['classnames', 'preact', 'preact/hooks', 'prop-types', 'react-fast-compare', 'algoliasearch-helper', 'rc-slider'],
     plugins: [
       ...defaultPlugins,
       nodeResolve(),
