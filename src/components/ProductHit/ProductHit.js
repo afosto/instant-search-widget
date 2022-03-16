@@ -4,6 +4,8 @@ import useIndexContext from '../../hooks/useIndexContext';
 const ProductHit = ({ hit }) => {
   const { template } = useIndexContext();
   const { mapping = {} } = template || {};
+  const formatLocale = window.navigator.language;
+  const currencySettings = { style: 'currency', currency: 'EUR' };
 
   return (
     <a href={hit[mapping.url || 'url']} className="ais-Hits-item-inner">
@@ -24,10 +26,10 @@ const ProductHit = ({ hit }) => {
       )}
       {(hit[mapping.sale_price || 'sale_price'] || hit[mapping.price || 'price']) && (
         <span className="ais-Hits-item-price-display">
-          {new Intl.NumberFormat(window.navigator.language, { style: 'currency', currency: 'EUR' }).format(hit.sale_price ? hit.sale_price : hit.price)}
+          {new Intl.NumberFormat(formatLocale, currencySettings).format(hit.sale_price ? hit.sale_price : hit.price)}
           {hit[mapping.sale_price || 'sale_price'] && hit[mapping.price || 'price'] ? (
             <s className="ais-Hits-item-price-original">
-              {new Intl.NumberFormat(window.navigator.language, { style: 'currency', currency: 'EUR' }).format(hit.price)}
+              {new Intl.NumberFormat(formatLocale, currencySettings).format(hit.price)}
             </s>
           ): null}
         </span>

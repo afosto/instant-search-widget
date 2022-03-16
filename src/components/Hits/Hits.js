@@ -19,8 +19,9 @@ const Hits = () => {
 
   return (
     <div className="af-is-widget__results">
-      {indexes.map(({ alias = '', template = {} }) => {
+      {indexes.map(({ alias, template = {} }) => {
         const { name } = template;
+
         return (
           <Index indexName={alias} key={alias}>
             <IndexProvider value={{ alias, template }}>
@@ -29,8 +30,8 @@ const Hits = () => {
                   {name}
                   <Stats />
                 </div>
-                <div className={`af-is-widget__results__grid af-is-widget__results__${Object.keys(hitTemplates).includes(name) ? name.toLowerCase() : 'default'}`}>
-                  <AisHits hitComponent={hitTemplates[name] ? hitTemplates[name] : hitTemplates['DEFAULT']} />
+                <div className={`af-is-widget__results__grid af-is-widget__results__${Object.keys(hitTemplates).includes(name) ? name.toLowerCase() : 'Default'}`}>
+                  <AisHits hitComponent={hitTemplates[name] ? hitTemplates[name] : hitTemplates.DEFAULT} />
                 </div>
               </div>
             </IndexProvider>

@@ -1,6 +1,5 @@
 import { h } from 'preact';
 import { ClearRefinements, DynamicWidgets, Panel, RefinementList } from 'react-instantsearch-dom';
-
 import useWidgetContext from '../../hooks/useWidgetContext';
 import RangeSlider from '../RangeSlider';
 
