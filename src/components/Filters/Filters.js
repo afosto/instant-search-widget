@@ -17,7 +17,11 @@ const Filters = () => {
       <DynamicWidgets
         maxValuesPerFacet={1000} // Suppress warning
         transformItems={(_, {results}) => Object.keys(results._rawResults[0].facets)}
-        fallbackComponent={({ attribute }) => <Panel header={attribute}><RefinementList attribute={attribute} limit={10} showMoreLimit={25} /></Panel>}
+        fallbackComponent={({ attribute }) => (
+          <Panel header={attribute}>
+            <RefinementList attribute={attribute} limit={10} showMoreLimit={25} />
+          </Panel>
+        )}
       >
         {filters.map(filter => {
           console.log(filter?.label || filter.key)

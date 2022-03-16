@@ -44,7 +44,6 @@ const Widget = ({ config, searchKey }) => {
           exit={{ opacity: 0, transition: { type: 'tween', duration: .195, ease: [0.4, 0, 0.2, 1] } }}
           className="af-is-widget__dialog"
           isOpen
-          key="dialofg"
           onDismiss={handleClose}
         >
           <MotionDialogContent

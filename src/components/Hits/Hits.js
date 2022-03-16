@@ -1,9 +1,10 @@
 import { h } from 'preact';
+import { Hits as AisHits, Index } from 'react-instantsearch-dom';
 import useWidgetContext from '../../hooks/useWidgetContext';
+import DefaultHit from '../DefaultHit';
 import IndexProvider from '../IndexProvider';
 import PagesHit from '../PagesHit';
 import ProductHit from '../ProductHit';
-import { Hits as AisHits, Index } from 'react-instantsearch-dom';
 import Stats from '../Stats';
 
 const Hits = () => {
@@ -13,6 +14,7 @@ const Hits = () => {
   const hitTemplates = {
     PRODUCTS: ProductHit,
     PAGES: PagesHit,
+    DEFAULT: DefaultHit,
   };
 
   return (
@@ -27,8 +29,8 @@ const Hits = () => {
                   {name}
                   <Stats />
                 </div>
-                <div className={`af-is-widget__results__grid af-is-widget__results__${name.toLowerCase()}`}>
-                  <AisHits hitComponent={hitTemplates[name]} />
+                <div className={`af-is-widget__results__grid af-is-widget__results__${Object.keys(hitTemplates).includes(name) ? name.toLowerCase() : 'default'}`}>
+                  <AisHits hitComponent={hitTemplates[name] ? hitTemplates[name] : hitTemplates['DEFAULT']} />
                 </div>
               </div>
             </IndexProvider>
