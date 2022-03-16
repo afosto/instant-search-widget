@@ -23,7 +23,6 @@ const Filters = () => {
         )}
       >
         {filters.map(filter => {
-          console.log(filter?.label || filter.key)
           switch (filter.type) {
             case 'NUMBER':
               return (

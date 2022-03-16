@@ -11,12 +11,13 @@
       }
 
       &-item {
+        width: initial;
+
         &-title {
           display: block;
           font-weight: 600;
           font-size: 14px;
           line-height: 20px;
-          margin-bottom: 12px;
           color: var(--af-is-gray-120);
         }
 
@@ -25,7 +26,7 @@
           font-weight: 400;
           font-size: 13px;
           line-height: 16px;
-          margin-bottom: 12px;
+          margin-top: 12px;
           color: var(--af-is-gray-120);
           overflow: hidden;
           -webkit-line-clamp: 3;

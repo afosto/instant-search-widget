@@ -2,10 +2,12 @@
 # yarn lockfile v1
 
 
-"@afosto/instant-search-client@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@afosto/instant-search-client/-/instant-search-client-1.0.2.tgz#ccdc24ec481abca77e473d9745ddc4a02c866e98"
-  integrity sha512-Mdqsf+ZzrmA5GyeW7sCUSHBiG2Hnssu8aeVyDfOTRSrxJg79TjoVzD2BDrDBvlTThceoHf8BbUTMgY4Zz67tew==
+"@afosto/instant-search-client@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@afosto/instant-search-client/-/instant-search-client-1.0.3.tgz#61f9c3ce92b82336be0c55d8e099d48f90d49fa9"
+  integrity sha512-no8ds1XHf9WR0L+6gsdt4egb/hDxUHFOCIB6EIVYvJ6i0sfIHQQjgUcZsoRZn8s5XFiEmxp0ntechTJ/lOCGnA==
+  dependencies:
+    uuid "^8.3.2"
 
 "@algolia/events@^4.0.1":
   version "4.0.1"
