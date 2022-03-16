@@ -4843,10 +4843,10 @@ rc-motion@^2.0.0:
     classnames "^2.2.1"
     rc-util "^5.18.1"
 
-rc-slider@^10.0.0-alpha.4:
-  version "10.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/rc-slider/-/rc-slider-10.0.0-alpha.4.tgz#f14ec0905d53f1f9d7f495c301527d6eca5781cf"
-  integrity sha512-ih2xwkBgXAWAf7MjZIZyCiiWo6tnoIMuHifn0UeKXVAup7sH53QdSVvT9x/cysuSZIPNMYWEf6mec184n3gbiQ==
+rc-slider@^10.0.0-alpha.5:
+  version "10.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/rc-slider/-/rc-slider-10.0.0-alpha.5.tgz#cf13751bda15ce210a1c0d80e1675411e4c4b995"
+  integrity sha512-EUAl7silkx+vtBbRkjUEzFWzxnMJrxOLcmUhCwP2xdZybRInRnLMU6TfE1fJLxb6ZN77ghSai6k7yExayVC+Gg==
   dependencies:
     "@babel/runtime" "^7.10.1"
     classnames "^2.2.5"

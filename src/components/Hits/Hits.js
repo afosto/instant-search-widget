@@ -1,8 +1,8 @@
 import { h } from 'preact';
+import { Hits as AisHits, Index } from 'react-instantsearch-dom';
 import useWidgetContext from '../../hooks/useWidgetContext';
 import PagesHit from '../PagesHit';
 import ProductHit from '../ProductHit';
-import { Hits as AisHits, Index } from 'react-instantsearch-dom';
 import Stats from '../Stats';
 
 const Hits = () => {
@@ -16,7 +16,7 @@ const Hits = () => {
 
   return (
     <div className="af-is-widget__results">
-      {indexes.map(({ alias = '', template = '' }) => (
+      {indexes.map(({ alias, template }) => (
         <Index indexName={alias} key={alias}>
           <div>
             <div className="af-is-widget__results__header">

@@ -1,23 +1,22 @@
 import { h } from 'preact';
-import Slider from "rc-slider";
 import { useEffect, useState } from "preact/hooks";
+import Slider from "rc-slider";
 import { connectRange } from "react-instantsearch-dom";
+import useWidgetContext from '../../hooks/useWidgetContext';
 
 const RangeSlider = ({ min, max, currentRefinement, canRefine, refine }) => {
-  const [stateMin, setStateMin] = useState(min);
-  const [stateMax, setStateMax] = useState(max);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsMounted(true);
-    }, 1000);
-  }, []);
+  const { isFetchingSettings } = useWidgetContext();
+  const [stateRange, setStateRange] = useState({
+    min: min || 0,
+    max: max || 0,
+  })
 
   useEffect(() => {
     if (canRefine) {
-      setStateMin(currentRefinement.min);
-      setStateMax(currentRefinement.max);
+      setStateRange({
+        min: currentRefinement.min,
+        max: currentRefinement.max,
+      });
     }
   }, [currentRefinement.min, currentRefinement.max]);
 
@@ -32,8 +31,10 @@ const RangeSlider = ({ min, max, currentRefinement, canRefine, refine }) => {
   };
 
   const onValuesUpdated = ([min, max]) => {
-    setStateMin(min);
-    setStateMax(max);
+    setStateRange({
+      min,
+      max,
+    });
   };
 
   return (
@@ -42,18 +43,17 @@ const RangeSlider = ({ min, max, currentRefinement, canRefine, refine }) => {
         range
         min={min}
         max={max}
-        value={[stateMin, stateMax]}
+        value={[stateRange.min, stateRange.max]}
         onChange={onValuesUpdated}
         onAfterChange={onChange}
-        autoFocus={false}
-        disabled={!isMounted}
+        disabled={isFetchingSettings}
       />
       <div className="af-is-widget__slider__label af-is-widget__slider__labels">
         <div className="af-is-widget__slider__label af-is-widget__slider__label-min">
-          {stateMin}
+          {stateRange.min}
         </div>
         <div className="af-is-widget__slider__label af-is-widget__slider__label-max">
-          {stateMax}
+          {stateRange.max}
         </div>
       </div>
     </div>
