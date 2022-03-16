@@ -1,4 +1,5 @@
 import { h, render } from 'preact';
+import merge from 'lodash.merge';
 import Widget from './components/Widget';
 import { DEFAULT_LOCALE, DEFAULT_TRANSLATIONS } from './constants';
 
@@ -14,7 +15,7 @@ const AfostoInstantSearchWidget = () => {
 
   const renderWidget = () => {
     const locale = props.locale || DEFAULT_LOCALE;
-    const translations = translationMessages[locale] || DEFAULT_TRANSLATIONS;
+    const translations = merge(DEFAULT_TRANSLATIONS, translationMessages[locale] || {});
     render(h(Widget, { ...props, locale, translations }), document.body);
   };
 
@@ -35,7 +36,6 @@ const AfostoInstantSearchWidget = () => {
   };
 
   const addMessages = (locale, messages = {}) => {
-    console.log(locale);
     translationMessages[locale] = messages;
 
     if (isInitialized && locale === props.config?.locale) {

@@ -1,9 +1,10 @@
 import { h } from 'preact';
 import { HitsPerPage as AisHitsPerPage } from 'react-instantsearch-dom';
+import { DEFAULT_HITS_PER_PAGE, DEFAULT_HITS_PER_PAGE_OPTIONS } from '../../constants';
 import useWidgetContext from '../../hooks/useWidgetContext';
 
 const HitsPerPage = () => {
-  const { settings } = useWidgetContext();
+  const { settings, translations } = useWidgetContext();
   const [firstIndex] = settings.indexes || [];
   const mainIndexKey = settings.filters?.show_for || firstIndex?.alias;
   const mainIndex = (settings.indexes || []).find(index => index.alias === mainIndexKey);
@@ -11,12 +12,11 @@ const HitsPerPage = () => {
   return (
     <div className="af-is-widget__page-size">
       <AisHitsPerPage
-        items={[
-          { value: 12, label: "12 items" },
-          { value: 24, label: "24 items" },
-          { value: 48, label: "48 items" }
-        ]}
-        defaultRefinement={mainIndex?.results_per_page || 12}
+        items={DEFAULT_HITS_PER_PAGE_OPTIONS.map(option => ({
+          value: option,
+          label: translations.hitsPerPage.optionsLabel.replace('{value}', option)
+        }))}
+        defaultRefinement={mainIndex?.results_per_page || DEFAULT_HITS_PER_PAGE}
       />
     </div>
   );
