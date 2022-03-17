@@ -142,6 +142,8 @@ AfostoInstantSearchWidget.addMessages('en', {
   },
   search: {
     placeholder: 'Search...',
+    resetTitle: 'Clear your search query.',
+    submitTitle: 'Submit your search query.',
   },
   stats: {
     resultsLabel: '{value} results found',
