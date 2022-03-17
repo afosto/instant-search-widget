@@ -6,8 +6,24 @@ import commonjs from '@rollup/plugin-commonjs';
 import copy from 'rollup-plugin-copy'
 import postcss from "rollup-plugin-postcss";
 import { terser } from 'rollup-plugin-terser';
+import filesize from 'rollup-plugin-filesize';
+import packageJson from './package.json';
 
 const INPUT = 'src/index.js';
+
+const createBanner = () => {
+  return `
+/**
+ * @license Afosto Instant Search Widget v${packageJson.version} | ${packageJson.repository.url}
+ * afosto-instant-search-widget.min.js
+ *
+ * Copyright (c) Afosto Saas BV.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+  `;
+};
 
 const defaultPlugins = [
   alias({
@@ -25,6 +41,11 @@ module.exports = [
     input: INPUT,
     plugins: [
       ...defaultPlugins,
+      babel({
+        babelHelpers: 'bundled',
+        exclude: 'node_modules/**',
+        presets: [['@babel/preset-env', { modules: false, useBuiltIns: 'usage', corejs: 3 }], ['@babel/preset-react']],
+      }),
       nodeResolve({
         browser: true,
       }),
@@ -36,11 +57,6 @@ module.exports = [
       commonjs({
         exclude: 'src/**',
       }),
-      babel({
-        babelHelpers: 'bundled',
-        exclude: /node_modules/,
-        presets: [['@babel/preset-env', { modules: false, useBuiltIns: 'usage', corejs: 3 }], ['@babel/preset-react']],
-      }),
       terser(),
       copy({
         targets: [
@@ -51,17 +67,20 @@ module.exports = [
           } },
         ],
       }),
+      filesize(),
     ],
     output: {
       file: `dist/afosto-instant-search-widget.min.js`,
       format: 'umd',
+      banner: createBanner(),
+      sourcemap: true,
       name: 'window',
       extend: true,
     },
   },
   {
     input: INPUT,
-    external: ['classnames', 'preact', 'preact/hooks', 'prop-types', 'react-fast-compare', 'algoliasearch-helper', 'rc-slider'],
+    external: ['classnames', 'lodash.merge', 'preact', 'preact/hooks', 'prop-types', 'react-fast-compare', 'algoliasearch-helper', 'rc-slider'],
     plugins: [
       ...defaultPlugins,
       nodeResolve(),
