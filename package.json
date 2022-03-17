@@ -1,6 +1,6 @@
 {
   "name": "@afosto/instant-search-widget",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Afosto instant search javascript widget",
   "private": false,
   "main": "./dist/afosto-instant-search-widget.min.js",
