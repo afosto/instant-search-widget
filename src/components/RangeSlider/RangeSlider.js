@@ -1,7 +1,7 @@
 import { h } from 'preact';
-import { useEffect, useState } from "preact/hooks";
-import Slider from "rc-slider";
-import { connectRange } from "react-instantsearch-dom";
+import { useEffect, useState } from 'preact/hooks';
+import Slider from 'rc-slider';
+import { connectRange } from 'react-instantsearch-dom';
 import useWidgetContext from '../../hooks/useWidgetContext';
 
 const RangeSlider = ({ min, max, currentRefinement, canRefine, refine }) => {
@@ -9,7 +9,7 @@ const RangeSlider = ({ min, max, currentRefinement, canRefine, refine }) => {
   const [stateRange, setStateRange] = useState({
     min: min || 0,
     max: max || 0,
-  })
+  });
 
   useEffect(() => {
     if (canRefine) {
@@ -18,22 +18,22 @@ const RangeSlider = ({ min, max, currentRefinement, canRefine, refine }) => {
         max: currentRefinement.max,
       });
     }
-  }, [currentRefinement.min, currentRefinement.max]);
+  }, [canRefine, currentRefinement.min, currentRefinement.max]);
 
   if (min === max) {
     return null;
   }
 
-  const onChange = ([min, max]) => {
-    if (currentRefinement.min !== min || currentRefinement.max !== max) {
-      refine({ min, max });
+  const onChange = ([minValue, maxValue]) => {
+    if (currentRefinement.min !== minValue || currentRefinement.max !== maxValue) {
+      refine({ min: minValue, max: maxValue });
     }
   };
 
-  const onValuesUpdated = ([min, max]) => {
+  const onValuesUpdated = ([minValue, maxValue]) => {
     setStateRange({
-      min,
-      max,
+      min: minValue,
+      max: maxValue,
     });
   };
 

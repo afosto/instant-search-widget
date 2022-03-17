@@ -1,6 +1,4 @@
-import AfostoInstantSearchWidget from '../AfostoInstantSearchWidget';
-
-AfostoInstantSearchWidget.addMessages('nl', {
+const messages = {
   close: 'Sluiten',
   filters: {
     noResults: 'Geen opties',
@@ -13,8 +11,12 @@ AfostoInstantSearchWidget.addMessages('nl', {
   },
   search: {
     placeholder: 'Zoeken...',
+    resetTitle: 'Wis je zoekopdracht.',
+    submitTitle: 'Verstuur je zoekopdracht.',
   },
   stats: {
     resultsLabel: '{value} resultaten gevonden',
   },
-});
+};
+
+export default messages;

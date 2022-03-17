@@ -1,9 +1,6 @@
 import { h } from 'preact';
 import { ClearRefinements, DynamicWidgets, Panel, RefinementList } from 'react-instantsearch-dom';
-import {
-  DEFAULT_FILTER_MAX_OPTIONS_COUNT,
-  DEFAULT_FILTER_OPTIONS_COUNT
-} from '../../constants';
+import { DEFAULT_FILTER_MAX_OPTIONS_COUNT, DEFAULT_FILTER_OPTIONS_COUNT } from '../../constants';
 import useWidgetContext from '../../hooks/useWidgetContext';
 import RangeSlider from '../RangeSlider';
 
@@ -19,13 +16,15 @@ const Filters = () => {
       <ClearRefinements translations={{ reset: translations.filters.reset }} />
       <DynamicWidgets
         maxValuesPerFacet={1000} // Suppress warning
-        transformItems={(_, {results}) => Object.keys(results._rawResults[0].facets)}
+        /* eslint-disable-next-line no-underscore-dangle */
+        transformItems={(_, { results }) => Object.keys(results._rawResults[0].facets)}
         fallbackComponent={({ attribute }) => (
           <Panel header={attribute}>
             <RefinementList
               attribute={attribute}
               limit={DEFAULT_FILTER_OPTIONS_COUNT}
-              showMoreLimit={DEFAULT_FILTER_MAX_OPTIONS_COUNT} />
+              showMoreLimit={DEFAULT_FILTER_MAX_OPTIONS_COUNT}
+            />
           </Panel>
         )}
       >
@@ -50,7 +49,8 @@ const Filters = () => {
                     showMoreLimit={filter.max_options_count || DEFAULT_FILTER_MAX_OPTIONS_COUNT}
                     translations={{
                       noResults: translations.filters.noResults,
-                      showMore: expanded => translations.filters[expanded ? 'showLess' : 'showMore']
+                      showMore: expanded =>
+                        translations.filters[expanded ? 'showLess' : 'showMore'],
                     }}
                     showMore
                   />

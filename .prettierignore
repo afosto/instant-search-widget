@@ -1,0 +1,4 @@
+dist/**
+i18n/**
+node_modules
+yarn.lock

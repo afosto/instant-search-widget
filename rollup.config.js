@@ -1,12 +1,15 @@
-import { resolve } from "path"
+import { resolve } from 'path';
+import prettier from 'prettier';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import alias from '@rollup/plugin-alias';
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
-import copy from 'rollup-plugin-copy'
-import postcss from "rollup-plugin-postcss";
+import replace from '@rollup/plugin-replace';
+import copy from 'rollup-plugin-copy';
+import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
 import filesize from 'rollup-plugin-filesize';
+import * as prettierConfig from './prettier.config';
 import packageJson from './package.json';
 
 const INPUT = 'src/index.js';
@@ -31,20 +34,32 @@ const defaultPlugins = [
       { find: 'react', replacement: 'preact/compat' },
       { find: 'react-dom/test-utils', replacement: 'preact/test-utils' },
       { find: 'react-dom', replacement: 'preact/compat' },
-      { find: 'react/jsx-runtime', replacement: 'preact/jsx-runtime' }
-    ]
+      { find: 'react/jsx-runtime', replacement: 'preact/jsx-runtime' },
+    ],
   }),
 ];
+
+const prettierOptions = {
+  ...prettierConfig,
+  parser: 'babel',
+};
 
 module.exports = [
   {
     input: INPUT,
     plugins: [
       ...defaultPlugins,
+      replace({
+        preventAssignment: true,
+        'process.env.NODE_ENV': JSON.stringify('production'),
+      }),
       babel({
         babelHelpers: 'bundled',
         exclude: 'node_modules/**',
-        presets: [['@babel/preset-env', { modules: false, useBuiltIns: 'usage', corejs: 3 }], ['@babel/preset-react']],
+        presets: [
+          ['@babel/preset-env', { modules: false, useBuiltIns: 'usage', corejs: 3 }],
+          ['@babel/preset-react'],
+        ],
       }),
       nodeResolve({
         browser: true,
@@ -60,11 +75,26 @@ module.exports = [
       terser(),
       copy({
         targets: [
-          { src: 'src/i18n/**/*', dest: 'dist/i18n', transform(content) {
-            return content
-              .toString()
-              .replace("import AfostoInstantSearchWidget from '../AfostoInstantSearchWidget';", "// Load this after the AfostoInstantSearchWidget");
-          } },
+          {
+            src: 'src/i18n/**/*',
+            dest: 'dist/i18n',
+            transform(content, filename) {
+              const locale = filename.replace('.js', '');
+              const messages = content
+                .toString()
+                .replace('export default messages;', '')
+                .replace('};', '}')
+                .replace('const messages = ', '');
+
+              return prettier.format(
+                `
+                  // Load this after the AfostoInstantSearchWidget
+                  AfostoInstantSearchWidget.addMessages('${locale}', ${messages});
+            `,
+                prettierOptions,
+              );
+            },
+          },
         ],
       }),
       filesize(),
@@ -74,13 +104,23 @@ module.exports = [
       format: 'umd',
       banner: createBanner(),
       sourcemap: true,
+      exports: 'named',
       name: 'window',
       extend: true,
     },
   },
   {
     input: INPUT,
-    external: ['classnames', 'lodash.merge', 'preact', 'preact/hooks', 'prop-types', 'react-fast-compare', 'algoliasearch-helper', 'rc-slider'],
+    external: [
+      'classnames',
+      'lodash.merge',
+      'preact',
+      'preact/hooks',
+      'prop-types',
+      'react-fast-compare',
+      'algoliasearch-helper',
+      'rc-slider',
+    ],
     plugins: [
       ...defaultPlugins,
       nodeResolve(),
@@ -91,7 +131,10 @@ module.exports = [
       postcss({
         plugins: [],
         inject: false,
-      })
+      }),
+      copy({
+        targets: [{ src: 'src/i18n/**/*', dest: 'i18n' }],
+      }),
     ],
     output: [
       {
@@ -107,5 +150,5 @@ module.exports = [
         sourcemap: true,
       },
     ],
-  }
+  },
 ];

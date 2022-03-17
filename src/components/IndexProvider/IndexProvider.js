@@ -1,5 +1,4 @@
-import { h } from 'preact';
-import { createContext } from 'preact';
+import { createContext, h } from 'preact';
 
 const initialState = {
   alias: null,

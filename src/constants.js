@@ -17,6 +17,8 @@ export const DEFAULT_TRANSLATIONS = {
   },
   search: {
     placeholder: 'Search...',
+    resetTitle: 'Clear your search query.',
+    submitTitle: 'Submit your search query.',
   },
   stats: {
     resultsLabel: '{value} results found',

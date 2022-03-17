@@ -1,6 +1,6 @@
 import { useEffect } from 'preact/hooks';
 
-const useClickListener = (onClick) => {
+const useClickListener = onClick => {
   useEffect(() => {
     const elements = [...document.querySelectorAll('[data-af-instant-search]')];
 

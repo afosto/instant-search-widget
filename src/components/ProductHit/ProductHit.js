@@ -20,28 +20,20 @@ const ProductHit = ({ hit }) => {
           <img src={image} />
         </div>
       )}
-      {title && (
-        <span className="ais-Hits-item-title">
-          {title}
-        </span>
-      )}
-      {description && (
-        <span className="ais-Hits-item-description">
-          {description}
-        </span>
-      )}
+      {title && <span className="ais-Hits-item-title">{title}</span>}
+      {description && <span className="ais-Hits-item-description">{description}</span>}
       {(salePrice || price) && (
         <span className="ais-Hits-item-price-display">
-          {new Intl.NumberFormat(formatLocale, currencySettings).format(salePrice ? salePrice : price)}
+          {new Intl.NumberFormat(formatLocale, currencySettings).format(salePrice || price)}
           {salePrice && price ? (
             <s className="ais-Hits-item-price-original">
               {new Intl.NumberFormat(formatLocale, currencySettings).format(price)}
             </s>
-          ): null}
+          ) : null}
         </span>
       )}
     </a>
   );
-}
+};
 
 export default ProductHit;

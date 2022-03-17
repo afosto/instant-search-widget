@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { useCallback, useState } from 'preact/hooks';
 import { DialogContent, DialogOverlay } from '@reach/dialog';
-import { LazyMotion, domAnimation, m, AnimatePresence } from "framer-motion"
+import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import { InstantSearch } from 'react-instantsearch-dom';
 import useClickListener from '../../hooks/useClickListener';
 import useClientSetup from '../../hooks/useClientSetup';
@@ -39,24 +39,34 @@ const Widget = ({ config, locale, searchKey, translations }) => {
         <AnimatePresence>
           {open && (
             <MotionDialogOverlay
-              initial={{ opacity: 0}}
-              animate={{ opacity: 1, transition: { type: 'tween', duration: .225, ease: [0.4, 0, 0.2, 1] } }}
-              exit={{ opacity: 0, transition: { type: 'tween', duration: .195, ease: [0.4, 0, 0.2, 1] } }}
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { type: 'tween', duration: 0.225, ease: [0.4, 0, 0.2, 1] },
+              }}
+              exit={{
+                opacity: 0,
+                transition: { type: 'tween', duration: 0.195, ease: [0.4, 0, 0.2, 1] },
+              }}
               className="af-is-widget__dialog"
               onDismiss={handleClose}
               isOpen
             >
               <MotionDialogContent
-                initial={{ y: -20}}
-                animate={{ y: 0, transition: { type: 'tween', duration: .225, ease: [0.4, 0, 0.2, 1] } }}
-                exit={{ y: -20, transition: { type: 'tween', duration: .195, ease: [0.4, 0, 0.2, 1] } }}
-                className="af-is-widget__content">
+                initial={{ y: -20 }}
+                animate={{
+                  y: 0,
+                  transition: { type: 'tween', duration: 0.225, ease: [0.4, 0, 0.2, 1] },
+                }}
+                exit={{
+                  y: -20,
+                  transition: { type: 'tween', duration: 0.195, ease: [0.4, 0, 0.2, 1] },
+                }}
+                className="af-is-widget__content"
+              >
                 <div className="af-is-widget__layout">
-                  <CloseButton onClick={handleClose}/>
-                  <InstantSearch
-                    indexName={mainIndex?.alias}
-                    searchClient={client}
-                  >
+                  <CloseButton onClick={handleClose} />
+                  <InstantSearch indexName={mainIndex?.alias} searchClient={client}>
                     <Filters />
                     <SearchBox onClose={handleClose} />
                     <HitsPerPage />

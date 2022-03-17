@@ -9,7 +9,6 @@ const AfostoInstantSearchWidget = () => {
     locale: DEFAULT_LOCALE,
     config: {},
     searchKey: undefined,
-    translations: {},
   };
   const translationMessages = {};
 

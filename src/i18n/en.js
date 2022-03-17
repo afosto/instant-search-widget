@@ -1,6 +1,4 @@
-import AfostoInstantSearchWidget from '../AfostoInstantSearchWidget';
-
-AfostoInstantSearchWidget.addMessages('en', {
+const messages = {
   close: 'Close',
   filters: {
     noResults: 'No results',
@@ -13,8 +11,12 @@ AfostoInstantSearchWidget.addMessages('en', {
   },
   search: {
     placeholder: 'Search...',
+    resetTitle: 'Clear your search query.',
+    submitTitle: 'Submit your search query.',
   },
   stats: {
     resultsLabel: '{value} results found',
   },
-});
+};
+
+export default messages;

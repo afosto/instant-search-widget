@@ -31,6 +31,10 @@ npm install @afosto/instant-search-widget
 This library supports the **last two** versions of major browsers (Chrome, Edge, Firefox, Safari).
 
 ```html
+<!-- Styles -->
+<link href="https://cdn.jsdelivr.net/npm/@afosto/instant-search-widget@latest/dist/afosto-instant-search-widget.min.css" />
+
+<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/@afosto/instant-search-widget@latest/dist/afosto-instant-search-widget.min.js"></script>
 ```
 
@@ -41,7 +45,8 @@ First you initialize the Afosto search widget with your **search engine key**. T
 ### ES6
 
 ```js
-import AfostoInstantSearchWidget from '@afosto/instant-search-widget';
+import { AfostoInstantSearchWidget } from '@afosto/instant-search-widget';
+import '@afosto/instant-search-widget/dist/afosto-instant-search-widget.min.css';
 
 AfostoInstantSearchWidget.init('my-search-engine-key');
 ```
@@ -49,7 +54,7 @@ AfostoInstantSearchWidget.init('my-search-engine-key');
 ### CJS
 
 ```js
-const AfostoInstantSearchWidget = require('@afosto/instant-search-widget');
+const { AfostoInstantSearchWidget } = require('@afosto/instant-search-widget');
 
 AfostoInstantSearchWidget.init('my-search-engine-key');
 ```
@@ -81,9 +86,12 @@ The default language used for this widget is English. To use other languages you
 ### ES6
 
 ```js
-import AfostoInstantSearchWidget from '@afosto/instant-search-widget';
-import '@afosto/instant-search-widget/i18n/en';
-import '@afosto/instant-search-widget/i18n/nl';
+import { AfostoInstantSearchWidget } from '@afosto/instant-search-widget';
+import nl from '@afosto/instant-search-widget/i18n/nl';
+import en from '@afosto/instant-search-widget/i18n/en';
+
+AfostoInstantSearchWidget.addMessages('nl', nl);
+AfostoInstantSearchWidget.addMessages('en', en);
 ```
 
 ### Browser
