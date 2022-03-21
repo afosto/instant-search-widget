@@ -38,3 +38,5 @@ export const DEFAULT_HIT_TEMPLATES = {
   PAGES: PagesHit,
   DEFAULT: DefaultHit,
 };
+
+export const EVENT_KEY_WIDGET_VISIBILITY = 'afInstantSearch.changeVisibility';

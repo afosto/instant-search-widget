@@ -3,7 +3,7 @@ import { useCallback, useState } from 'preact/hooks';
 import { DialogContent, DialogOverlay } from '@reach/dialog';
 import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import { InstantSearch } from 'react-instantsearch-dom';
-import useClickListener from '../../hooks/useClickListener';
+import useVisibilityListener from '../../hooks/useVisibilityListener';
 import useClientSetup from '../../hooks/useClientSetup';
 import CloseButton from '../CloseButton';
 import Filters from '../Filters';
@@ -27,11 +27,12 @@ const Widget = ({ config, locale, searchKey, translations }) => {
     setOpen(false);
   }, []);
 
-  const handleOpen = useCallback(() => {
-    setOpen(true);
+  const handleVisibilityEvent = useCallback(event => {
+    const visible = !!event?.detail?.show;
+    setOpen(visible);
   }, []);
 
-  useClickListener(handleOpen);
+  useVisibilityListener(handleVisibilityEvent);
 
   return (
     <WidgetProvider value={{ client, config, isFetchingSettings, locale, settings, translations }}>
