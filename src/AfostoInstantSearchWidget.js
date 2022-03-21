@@ -1,7 +1,7 @@
 import { h, render } from 'preact';
 import merge from 'lodash.merge';
 import Widget from './components/Widget';
-import { DEFAULT_LOCALE, DEFAULT_TRANSLATIONS } from './constants';
+import { DEFAULT_LOCALE, DEFAULT_TRANSLATIONS, EVENT_KEY_WIDGET_VISIBILITY } from './constants';
 
 const AfostoInstantSearchWidget = () => {
   let isInitialized = false;
@@ -11,6 +11,37 @@ const AfostoInstantSearchWidget = () => {
     searchKey: undefined,
   };
   const translationMessages = {};
+
+  const changeWidgetVisibility = show => {
+    const event = new CustomEvent(EVENT_KEY_WIDGET_VISIBILITY, { detail: { show } });
+    document.dispatchEvent(event);
+  };
+
+  const hide = () => {
+    changeWidgetVisibility(false);
+  };
+
+  const show = () => {
+    changeWidgetVisibility(true);
+  };
+
+  const destroy = () => {
+    const elements = [...document.querySelectorAll('[data-af-instant-search]')];
+
+    elements.forEach(element => {
+      element.removeEventListener('click', show);
+    });
+
+    render(null, document.body);
+  };
+
+  const initClickListeners = () => {
+    const elements = [...document.querySelectorAll('[data-af-instant-search]')];
+
+    elements.forEach(element => {
+      element.addEventListener('click', show);
+    });
+  };
 
   const renderWidget = () => {
     const locale = props.locale || DEFAULT_LOCALE;
@@ -31,6 +62,10 @@ const AfostoInstantSearchWidget = () => {
     };
     isInitialized = true;
 
+    // Destroy widget to trigger unmount handlers and remove event listeners.
+    destroy();
+
+    initClickListeners();
     renderWidget();
   };
 
@@ -52,8 +87,11 @@ const AfostoInstantSearchWidget = () => {
 
   return {
     addMessages,
+    destroy,
+    hide,
     init,
     setLocale,
+    show,
   };
 };
 
