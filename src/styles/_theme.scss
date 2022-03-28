@@ -145,11 +145,11 @@ a[class^='ais-'] {
 .ais-Menu-showMore,
 .ais-RefinementList-showMore,
 .ais-RelevantSort-button {
-  padding: 0.3rem 0.5rem;
-  font-size: 0.8rem;
+  padding: 4px 8px;
+  font-size: 14px;
   color: #fff;
   background-color: var(--af-is-primary-500);
-  border-radius: 5px;
+  border-radius: 4px;
   transition: background-color 0.2s ease-out;
   outline: none;
 
@@ -328,21 +328,18 @@ a[class^='ais-'] {
 .ais-Menu-count,
 .ais-RefinementList-count,
 .ais-ToggleRefinement-count {
-  position: relative;
-  top: -2px;
-  padding: 2px 6px;
-  font-size: 11px;
-  line-height: 16px;
-  background-color: var(--af-is-primary-100);
-  color: var(--af-is-primary-700);
-  border: 1px solid var(--af-is-primary-200);
-  border-radius: 4px;
+  margin-left: 12px;
+  font-size: 12px;
+  line-height: 20px;
+  background-color: transparent;
+  color: var(--af-is-gray-70);
+  border: 0;
 }
 
 .ais-HierarchicalMenu-showMore,
 .ais-Menu-showMore,
 .ais-RefinementList-showMore {
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
 }
 
 .ais-Highlight-highlighted,
@@ -379,7 +376,7 @@ a[class^='ais-'] {
   margin-left: 1rem;
   padding: 1rem;
   width: calc(25% - 1rem);
-  border: 1px solid var(--af-is-gray-40);
+  border: 1px solid var(--af-is-gray-30);
   transition: .2s ease;
 
   &:hover {
@@ -406,7 +403,7 @@ a[class^='ais-'] {
 .ais-ResultsPerPage-select,
 .ais-SortBy-select {
   appearance: none;
-  padding: 8px 32px 8px 12px;
+  padding: 8px 40px 8px 12px;
   max-width: 100%;
   background-color: var(--af-is-common-white);
   background-image: url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Cpath d=%27M0 7.3l2.8-2.8 9.2 9.3 9.2-9.3 2.8 2.8-12 12.2z%27 fill%3D%22%233A4570%22 /%3E%3C/svg%3E');
@@ -450,11 +447,9 @@ a[class^='ais-'] {
 }
 
 .ais-Panel-header {
-  margin-bottom: 0.5rem;
-  padding-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   font-size: 0.8rem;
   font-weight: bold;
-  border-bottom: 1px solid var(--af-is-gray-40);
 }
 
 .ais-Panel-footer {
