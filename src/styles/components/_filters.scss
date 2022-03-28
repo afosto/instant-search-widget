@@ -1,12 +1,17 @@
 .af-is-widget__filters {
+  background-color: var(--af-is-common-white);
   &__header {
+    position: sticky;
+    top: -15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: -15px;
     margin-right: -15px;
+    margin-bottom: 16px;
     margin-left: -15px;
-    border-bottom: 1px solid var(--af-is-gray-50);
+    border-bottom: 1px solid var(--af-is-gray-30);
+    background-color: var(--af-is-common-white);
 
       @media (min-width: $screen-sm) {
         display: none;
@@ -25,7 +30,7 @@
       border: 0;
       align-self: stretch;
       height: auto;
-      border-left: 1px solid var(--af-is-gray-50);
+      border-left: 1px solid var(--af-is-gray-30);
       background-color: transparent;
 
       svg {
