@@ -2,17 +2,25 @@ import { h } from 'preact';
 import { ClearRefinements, DynamicWidgets, Panel, RefinementList } from 'react-instantsearch-dom';
 import { DEFAULT_FILTER_MAX_OPTIONS_COUNT, DEFAULT_FILTER_OPTIONS_COUNT } from '../../constants';
 import useWidgetContext from '../../hooks/useWidgetContext';
-import RangeSlider from '../RangeSlider';
+import RangeSlider from '../RangeSlider'
 
 const Filters = () => {
-  const { settings, translations } = useWidgetContext();
+  const { settings, translations, showFilters, setShowFilters } = useWidgetContext();
   const [firstIndex] = settings.indexes || [];
   const mainIndexKey = settings.filters?.show_for || firstIndex?.alias;
   const mainIndex = (settings.indexes || []).find(index => index.alias === mainIndexKey);
   const filters = mainIndex?.filters || [];
 
+  const handleCloseFilters = () => setShowFilters(false);
+
   return (
-    <div className="af-is-widget__filters">
+    <div className={`af-is-widget__filters${showFilters ? ' af-is-widget__filters--open' : ''}`}>
+      <div className="af-is-widget__filters__header">
+        <span className="af-is-widget__filters__header__title">Filters</span>
+        <button className="af-is-widget__filters__header__close" onClick={handleCloseFilters}>
+          {translations.close}
+        </button>
+      </div>
       <ClearRefinements translations={{ reset: translations.filters.reset }} />
       <DynamicWidgets
         maxValuesPerFacet={1000} // Suppress warning

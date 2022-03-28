@@ -18,6 +18,7 @@ const MotionDialogContent = m(DialogContent);
 
 const Widget = ({ config, locale, searchKey, translations }) => {
   const [open, setOpen] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
   const { client, isFetchingSettings, settings } = useClientSetup(searchKey);
   const [firstIndex] = settings.indexes || [];
   const mainIndexKey = settings.filters?.show_for || firstIndex?.alias;
@@ -25,6 +26,7 @@ const Widget = ({ config, locale, searchKey, translations }) => {
 
   const handleClose = useCallback(() => {
     setOpen(false);
+    setShowFilters(false);
   }, []);
 
   const handleVisibilityEvent = useCallback(event => {
@@ -35,7 +37,7 @@ const Widget = ({ config, locale, searchKey, translations }) => {
   useVisibilityListener(handleVisibilityEvent);
 
   return (
-    <WidgetProvider value={{ client, config, isFetchingSettings, locale, settings, translations }}>
+    <WidgetProvider value={{ client, config, isFetchingSettings, locale, settings, translations, showFilters, setShowFilters }}>
       <LazyMotion features={domAnimation}>
         <AnimatePresence>
           {open && (
