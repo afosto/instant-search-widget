@@ -1,0 +1,34 @@
+.ais-Pagination {
+  &-list {
+
+  }
+
+  &-item {
+
+    & + & {
+      margin-left: 4px;
+    }
+
+    .ais-Pagination-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 32px;
+      min-width: 32px;
+      font-size: 14px;
+      color: var(--af-is-gray-90);
+
+      &--selected {
+        color: var(--af-is-white);
+      }
+    }
+
+    &--previousPage,
+    &--nextPage {
+      .ais-Pagination-link {
+        font-size: 1.2rem;
+        line-height: 1;
+      }
+    }
+  }
+}

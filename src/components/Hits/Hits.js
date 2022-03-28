@@ -21,7 +21,7 @@ const Hits = () => {
             <IndexProvider value={{ alias, template }}>
               <div>
                 <div className="af-is-widget__results__header">
-                  {name}
+                  {`${name.charAt(0)}${name.slice(1).toLowerCase()}`}
                   <Stats />
                 </div>
                 <div className={`af-is-widget__results__grid af-is-widget__results__${templateKey}`}>
