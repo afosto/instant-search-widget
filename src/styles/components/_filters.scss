@@ -1,3 +1,47 @@
+.af-is-widget__filters {
+  background-color: var(--af-is-common-white);
+  &__header {
+    position: sticky;
+    top: -15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -15px;
+    margin-right: -15px;
+    margin-bottom: 16px;
+    margin-left: -15px;
+    border-bottom: 1px solid var(--af-is-gray-30);
+    background-color: var(--af-is-common-white);
+
+      @media (min-width: $screen-sm) {
+        display: none;
+      }
+
+    &__title {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 16px;
+      padding-left: 15px;
+    }
+
+    &__close {
+      padding: 12px 16px;
+      line-height: 26px;
+      border: 0;
+      align-self: stretch;
+      height: auto;
+      border-left: 1px solid var(--af-is-gray-30);
+      background-color: transparent;
+
+      svg {
+        line-height: 0;
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+}
+
 .ais-RefinementList {
   &-item {
     &:not(:last-of-type) {
