@@ -5,6 +5,7 @@ const messages = {
     reset: 'Filters wissen',
     showMore: 'Toon meer',
     showLess: 'Toon minder',
+    title: 'Filters',
   },
   hitsPerPage: {
     optionsLabel: '{value} resultaten',

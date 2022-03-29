@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { ClearRefinements, DynamicWidgets, Panel, RefinementList } from 'react-instantsearch-dom';
 import { DEFAULT_FILTER_MAX_OPTIONS_COUNT, DEFAULT_FILTER_OPTIONS_COUNT } from '../../constants';
 import useWidgetContext from '../../hooks/useWidgetContext';
-import RangeSlider from '../RangeSlider'
+import RangeSlider from '../RangeSlider';
 
 const Filters = () => {
   const { settings, translations, showFilters, setShowFilters } = useWidgetContext();
@@ -11,7 +11,9 @@ const Filters = () => {
   const mainIndex = (settings.indexes || []).find(index => index.alias === mainIndexKey);
   const filters = mainIndex?.filters || [];
 
-  const handleCloseFilters = () => setShowFilters(false);
+  const handleCloseFilters = () => {
+    setShowFilters(false);
+  };
 
   return (
     <div className={`af-is-widget__filters${showFilters ? ' af-is-widget__filters--open' : ''}`}>

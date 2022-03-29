@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'preact/hooks';
 
-const useMediaQuery = (query) => {
+const useMediaQuery = query => {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {
@@ -9,11 +9,11 @@ const useMediaQuery = (query) => {
       setMatches(media.matches);
     }
     const listener = () => setMatches(media.matches);
-    window.addEventListener("resize", listener);
-    return () => window.removeEventListener("resize", listener);
+    window.addEventListener('resize', listener);
+    return () => window.removeEventListener('resize', listener);
   }, [matches, query]);
 
   return matches;
-}
+};
 
 export default useMediaQuery;
