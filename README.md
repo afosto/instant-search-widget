@@ -136,6 +136,7 @@ AfostoInstantSearchWidget.addMessages('en', {
     reset: 'Clear filters',
     showMore: 'Show more',
     showLess: 'Show less',
+    title: 'Filters',
   },
   hitsPerPage: {
     optionsLabel: '{value} results',
