@@ -120,6 +120,7 @@ module.exports = [
       'react-fast-compare',
       'algoliasearch-helper',
       'rc-slider',
+      'uuid-random',
     ],
     plugins: [
       ...defaultPlugins,
