@@ -2,12 +2,12 @@
 # yarn lockfile v1
 
 
-"@afosto/instant-search-client@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@afosto/instant-search-client/-/instant-search-client-1.0.5.tgz#5f93e2a2545c0600049f65d8cb48ba7629921709"
-  integrity sha512-r/gcfVEoo1AhUaMK8gm/3bKN2/yWJSkbPbRaYHkwyowP3RccPAtgp/09+vWaLkXyw2Qn1YTwLTCUtmOpIUKkBA==
+"@afosto/instant-search-client@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@afosto/instant-search-client/-/instant-search-client-1.0.6.tgz#ea393cd1e74755132d1ba15e1b963ab57ea27e57"
+  integrity sha512-m9oeUmjX1KDwDs/V0Ie/tjVfKctbnbFXgrOvfNoJJoUfw0H6T9fULzrSS+yf55pOHtJw6d6T5woKwbwZTvkCYA==
   dependencies:
-    uuid "^8.3.2"
+    uuid-random "^1.3.2"
 
 "@algolia/events@^4.0.1":
   version "4.0.1"
@@ -8749,6 +8749,11 @@ utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
+
+uuid-random@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/uuid-random/-/uuid-random-1.3.2.tgz#96715edbaef4e84b1dcf5024b00d16f30220e2d0"
+  integrity sha512-UOzej0Le/UgkbWEO8flm+0y+G+ljUon1QWTEZOq1rnMAsxo2+SckbiZdKzAHHlVh6gJqI1TjC/xwgR50MuCrBQ==
 
 uuid@^3.3.2:
   version "3.4.0"
