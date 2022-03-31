@@ -6,5 +6,4 @@ const CloseButton = ({ onClick }) => (
   </button>
 );
 
-
 export default CloseButton;

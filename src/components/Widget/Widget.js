@@ -10,6 +10,7 @@ import Filters from '../Filters';
 import Hits from '../Hits';
 import HitsPerPage from '../HitsPerPage';
 import Pagination from '../Pagination';
+import ScrollLock from '../ScrollLock';
 import SearchBox from '../SearchBox';
 import WidgetProvider from '../WidgetProvider';
 
@@ -41,44 +42,47 @@ const Widget = ({ config, locale, searchKey, translations }) => {
       <LazyMotion features={domAnimation}>
         <AnimatePresence>
           {open && (
-            <MotionDialogOverlay
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: 1,
-                transition: { type: 'tween', duration: 0.225, ease: [0.4, 0, 0.2, 1] },
-              }}
-              exit={{
-                opacity: 0,
-                transition: { type: 'tween', duration: 0.195, ease: [0.4, 0, 0.2, 1] },
-              }}
-              className="af-is-widget__dialog"
-              onDismiss={handleClose}
-              isOpen
-            >
-              <MotionDialogContent
-                initial={{ y: -20 }}
+            <ScrollLock>
+              <MotionDialogOverlay
+                initial={{ opacity: 0 }}
                 animate={{
-                  y: 0,
+                  opacity: 1,
                   transition: { type: 'tween', duration: 0.225, ease: [0.4, 0, 0.2, 1] },
                 }}
                 exit={{
-                  y: -20,
+                  opacity: 0,
                   transition: { type: 'tween', duration: 0.195, ease: [0.4, 0, 0.2, 1] },
                 }}
-                className="af-is-widget__content"
+                className="af-is-widget__dialog"
+                onDismiss={handleClose}
+                isOpen
+                dangerouslyBypassScrollLock
               >
-                <div className="af-is-widget__layout">
-                  <CloseButton onClick={handleClose} />
-                  <InstantSearch indexName={mainIndex?.alias} searchClient={client}>
-                    <Filters />
-                    <SearchBox onClose={handleClose} />
-                    <HitsPerPage />
-                    <Hits />
-                    <Pagination />
-                  </InstantSearch>
-                </div>
-              </MotionDialogContent>
-            </MotionDialogOverlay>
+                <MotionDialogContent
+                  initial={{ y: -20 }}
+                  animate={{
+                    y: 0,
+                    transition: { type: 'tween', duration: 0.225, ease: [0.4, 0, 0.2, 1] },
+                  }}
+                  exit={{
+                    y: -20,
+                    transition: { type: 'tween', duration: 0.195, ease: [0.4, 0, 0.2, 1] },
+                  }}
+                  className="af-is-widget__content"
+                >
+                  <div className="af-is-widget__layout">
+                    <CloseButton onClick={handleClose} />
+                    <InstantSearch indexName={mainIndex?.alias} searchClient={client}>
+                      <Filters />
+                      <SearchBox onClose={handleClose} />
+                      <HitsPerPage />
+                      <Hits />
+                      <Pagination />
+                    </InstantSearch>
+                  </div>
+                </MotionDialogContent>
+              </MotionDialogOverlay>
+            </ScrollLock>
           )}
         </AnimatePresence>
       </LazyMotion>
