@@ -40,6 +40,8 @@ This library supports the **last two** versions of major browsers (Chrome, Edge,
 
 ## Getting started
 
+> To use the widget you will need an Afosto Instant Search search engine. Don't have one yet? Sign up on [Afosto.com](https://afosto.com/register/) and follow [the guides in our documentation](https://afosto.com/docs/apps/instant-search/). 
+
 First you initialize the Afosto search widget with your **search engine key**. This search engine key can be found in the Afosto app.
 
 ### ES6
