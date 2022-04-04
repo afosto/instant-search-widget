@@ -8,6 +8,8 @@
     border: 0;
     border-radius: 4px 4px 0 0;
     transition: .1s ease;
+    background-color: var(--af-is-common-white);
+    color: var(--af-is-gray-130);
 
     &:focus {
       outline: 0;

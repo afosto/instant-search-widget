@@ -23,6 +23,7 @@
       font-size: 16px;
       line-height: 16px;
       padding-left: 15px;
+      color: var(--af-is-gray-130);
     }
 
     &__close {
@@ -33,6 +34,7 @@
       height: auto;
       border-left: 1px solid var(--af-is-gray-30);
       background-color: transparent;
+      color: var(--af-is-gray-90);
 
       svg {
         line-height: 0;
