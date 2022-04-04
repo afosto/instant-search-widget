@@ -101,6 +101,7 @@
     grid-area: ⚙️;
     padding: 16px 16px 64px;
     border-right: 1px solid var(--af-is-gray-30);
+    border-bottom-left-radius: 4px;
     overflow: auto;
 
     @media (max-width: $screen-sm - 1px) {
