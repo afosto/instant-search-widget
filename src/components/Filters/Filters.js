@@ -26,8 +26,6 @@ const Filters = () => {
       <ClearRefinements translations={{ reset: translations.filters.reset }} />
       <DynamicWidgets
         maxValuesPerFacet={1000} // Suppress warning
-        /* eslint-disable-next-line no-underscore-dangle */
-        transformItems={(_, { results }) => Object.keys(results._rawResults[0].facets)}
         fallbackComponent={({ attribute }) => (
           <Panel header={attribute}>
             <RefinementList
