@@ -1,6 +1,6 @@
 {
   "name": "@afosto/instant-search-widget",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "Afosto instant search javascript widget",
   "private": false,
   "main": "./dist/afosto-instant-search-widget.min.js",
@@ -86,7 +86,7 @@
     "webpack-dev-server": "^4.6.0"
   },
   "dependencies": {
-    "@afosto/instant-search-client": "^1.0.7",
+    "@afosto/instant-search-client": "^1.0.8",
     "@reach/dialog": "^0.16.2",
     "framer-motion": "^6.2.8",
     "lodash.merge": "^4.6.2",
