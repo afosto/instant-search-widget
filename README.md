@@ -32,7 +32,7 @@ This library supports the **last two** versions of major browsers (Chrome, Edge,
 
 ```html
 <!-- Styles -->
-<link href="https://cdn.jsdelivr.net/npm/@afosto/instant-search-widget@latest/dist/afosto-instant-search-widget.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@afosto/instant-search-widget@latest/dist/afosto-instant-search-widget.min.css" />
 
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/@afosto/instant-search-widget@latest/dist/afosto-instant-search-widget.min.js"></script>
