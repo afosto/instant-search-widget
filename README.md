@@ -162,6 +162,11 @@ The widget is fully customizable with CSS. The layout is built with CSS grid and
 You can also check this demo from the article. It has a different layout and a dark theme.   
 [Afosto Instant Search Widget customization demo](https://codepen.io/gijsbotje/pen/oNppGqj)
 
+## Built with Afosto Instant Search Widget
+
+https://plantcareforbeginners.com/
+
+
 ## Compatibility
 
 - Node >= 14
