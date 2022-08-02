@@ -154,6 +154,14 @@ AfostoInstantSearchWidget.addMessages('en', {
 });
 
 ```
+
+### Customizing the design
+
+The widget is fully customizable with CSS. The layout is built with CSS grid and grid-areas. That means you can move parts of the widget to different place or hide them completely. Check out this article for more explanation on how to customize the widget: [Lightning fast search widget with Afosto Instant Search](https://medium.com/afosto/lightning-fast-search-widget-with-afosto-instant-search-d9391b01ec02)
+
+You can also check this demo from the article. It has a different layout and a dark theme.   
+[Afosto Instant Search Widget customization demo](https://codepen.io/gijsbotje/pen/oNppGqj)
+
 ## Compatibility
 
 - Node >= 14
