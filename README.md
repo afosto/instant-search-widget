@@ -134,6 +134,7 @@ If you would like to use your own translation messages, use the addMessages func
 AfostoInstantSearchWidget.addMessages('en', {
   close: 'Close',
   filters: {
+    closeFilters: 'Close',
     noResults: 'No results',
     reset: 'Clear filters',
     showMore: 'Show more',
