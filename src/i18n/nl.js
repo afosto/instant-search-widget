@@ -1,6 +1,7 @@
 const messages = {
   close: 'Sluiten',
   filters: {
+    closeFilters: 'Sluiten',
     noResults: 'Geen opties',
     reset: 'Filters wissen',
     showMore: 'Toon meer',

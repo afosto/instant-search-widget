@@ -7,6 +7,7 @@ export const DEFAULT_LOCALE = 'en';
 export const DEFAULT_TRANSLATIONS = {
   close: 'Close',
   filters: {
+    closeFilters: 'Close',
     noResults: 'No results',
     reset: 'Clear filters',
     showMore: 'Show more',

@@ -134,6 +134,7 @@ If you would like to use your own translation messages, use the addMessages func
 AfostoInstantSearchWidget.addMessages('en', {
   close: 'Close',
   filters: {
+    closeFilters: 'Close',
     noResults: 'No results',
     reset: 'Clear filters',
     showMore: 'Show more',
@@ -164,7 +165,7 @@ You can also check this demo from the article. It has a different layout and a d
 
 ## Built with Afosto Instant Search Widget
 
-https://plantcareforbeginners.com/
+https://plantcareforbeginners.com/  
 https://www.dekorenbeurs.nl/
 
 ## Compatibility
