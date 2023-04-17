@@ -1,6 +1,7 @@
 const messages = {
   close: 'Cerrar',
   filters: {
+    closeFilters: 'Cerrar',
     noResults: 'No hay resultados',
     reset: 'Limpiar los filtros',
     showMore: 'Mostrar más',

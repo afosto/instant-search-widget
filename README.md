@@ -165,7 +165,7 @@ You can also check this demo from the article. It has a different layout and a d
 
 ## Built with Afosto Instant Search Widget
 
-https://plantcareforbeginners.com/
+https://plantcareforbeginners.com/  
 https://www.dekorenbeurs.nl/
 
 ## Compatibility
