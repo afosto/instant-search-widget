@@ -20,7 +20,7 @@ const Filters = () => {
       <div className="af-is-widget__filters__header">
         <span className="af-is-widget__filters__header__title">Filters</span>
         <button className="af-is-widget__filters__header__close" onClick={handleCloseFilters}>
-          {translations.close}
+          {translations.filters?.closeFilters || translations.close}
         </button>
       </div>
       <ClearRefinements translations={{ reset: translations.filters.reset }} />
