@@ -18,6 +18,8 @@ const MotionDialogOverlay = m(DialogOverlay);
 const MotionDialogContent = m(DialogContent);
 
 const Widget = ({ config, locale, searchKey, translations }) => {
+  const { searchState: initialSearchState, hideFilters } = config || {};
+  const [searchState, setSearchState] = useState(initialSearchState);
   const [open, setOpen] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const { client, isFetchingSettings, settings } = useClientSetup(searchKey);
@@ -38,7 +40,18 @@ const Widget = ({ config, locale, searchKey, translations }) => {
   useVisibilityListener(handleVisibilityEvent);
 
   return (
-    <WidgetProvider value={{ client, config, isFetchingSettings, locale, settings, translations, showFilters, setShowFilters }}>
+    <WidgetProvider
+      value={{
+        client,
+        config,
+        isFetchingSettings,
+        locale,
+        settings,
+        translations,
+        showFilters,
+        setShowFilters,
+      }}
+    >
       <LazyMotion features={domAnimation}>
         <AnimatePresence>
           {open && (
@@ -72,8 +85,14 @@ const Widget = ({ config, locale, searchKey, translations }) => {
                 >
                   <div className="af-is-widget__layout">
                     <CloseButton onClick={handleClose} />
-                    <InstantSearch indexName={mainIndex?.alias} searchClient={client}>
-                      <Filters />
+                    <InstantSearch
+                      indexName={mainIndex?.alias}
+                      searchClient={client}
+                      {...(typeof searchState === 'object'
+                        ? { searchState, onSearchStateChange: newState => setSearchState(newState) }
+                        : {})}
+                    >
+                      <Filters hideFilters={hideFilters} />
                       <SearchBox onClose={handleClose} />
                       <HitsPerPage />
                       <Hits />

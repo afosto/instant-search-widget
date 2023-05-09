@@ -153,7 +153,30 @@ AfostoInstantSearchWidget.addMessages('en', {
     resultsLabel: '{value} results found',
   },
 });
+```
 
+### Initial search state
+It is possible to set an initial search state. With it, you can define the initial state of filters and the query.
+For a reference of the available options within the searchState, check the [documentation](https://www.algolia.com/doc/api-reference/widgets/ui-state/react/).
+
+```js
+AfostoInstantSearchWidget.init('my-search-engine-key', {
+  searchState: {
+    // set te initial query to 'phone'
+    query: 'phone',
+    // set the brand filter to initial option 'Apple' 
+    refinementList: {
+      brand: ['Apple'],
+    },
+    // set the range filter price to initial range between 20 and 500
+    range: {
+      price: {
+        min: 20,
+        max: 500
+      }
+    },
+  },
+});
 ```
 
 ### Customizing the design
