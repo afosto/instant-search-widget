@@ -8,7 +8,7 @@ import Stats from '../Stats';
 
 const Hits = () => {
   const { settings } = useWidgetContext();
-  const { indexes } = settings || {};
+  const { indexes = [] } = settings || {};
 
   return (
     <div className="af-is-widget__results">
@@ -26,13 +26,15 @@ const Hits = () => {
                     {`${name.charAt(0)}${name.slice(1).toLowerCase()}`}
                     <Stats />
                   </div>
-                  <div className={`af-is-widget__results__grid af-is-widget__results__${templateKey}`}>
+                  <div
+                    className={`af-is-widget__results__grid af-is-widget__results__${templateKey}`}
+                  >
                     <AisHits hitComponent={hitComponent} />
                   </div>
                 </div>
               </IndexProvider>
             </Index>
-          )
+          );
         })}
       </ScrollRestoration>
     </div>
