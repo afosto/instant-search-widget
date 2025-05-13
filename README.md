@@ -104,6 +104,8 @@ AfostoInstantSearchWidget.addMessages('en', en);
 <script src="https://cdn.jsdelivr.net/npm/@afosto/instant-search-widget@latest/dist/i18n/nl.js"></script>
 ```
 
+Currently supported languages: `de`, `en` (default), `es`, `fr` and `nl`.
+
 ### Configure locale
 
 Setup the locale on widget initialization.
