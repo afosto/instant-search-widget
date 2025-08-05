@@ -8,6 +8,11 @@ const messages = {
     showLess: 'Mostrar menos',
     title: 'Filtros',
   },
+  hitTemplates: {
+    default: 'Predeterminado',
+    products: 'Productos',
+    pages: 'Páginas',
+  },
   hitsPerPage: {
     optionsLabel: '{value} resultados',
   },
