@@ -2,7 +2,7 @@ import DefaultHit from './components/DefaultHit';
 import PagesHit from './components/PagesHit';
 import ProductHit from './components/ProductHit';
 
-export const DEFAULT_LOCALE = 'en';
+export const DEFAULT_LOCALE = 'nl';
 
 export const DEFAULT_TRANSLATIONS = {
   close: 'Close',
@@ -13,6 +13,11 @@ export const DEFAULT_TRANSLATIONS = {
     showMore: 'Show more',
     showLess: 'Show less',
     title: 'Filters',
+  },
+  hitTemplates: {
+    default: 'Default',
+    products: 'Products',
+    pages: 'Pages',
   },
   hitsPerPage: {
     optionsLabel: '{value} results',
