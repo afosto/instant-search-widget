@@ -10,7 +10,7 @@ const ProductHit = ({ hit }) => {
   const salePrice = hit[mapping.sale_price || 'sale_price'];
   const title = hit[mapping.title || 'title'];
   const url = hit[mapping.url || 'url'];
-  const formatLocale = window.navigator.language;
+  const formatLocale = navigator.language;
   const currencySettings = { style: 'currency', currency: 'EUR' };
 
   return (

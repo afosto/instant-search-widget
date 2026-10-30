@@ -15,13 +15,13 @@ const Hits = () => {
       <ScrollRestoration>
         {indexes.map(({ alias, template = {} }) => {
           const { name = 'DEFAULT' } = template;
-          const hitComponent = DEFAULT_HIT_TEMPLATES[name] || DEFAULT_HIT_TEMPLATES.DEFAULT;
-          const templateKey = DEFAULT_HIT_TEMPLATES[name] ? name.toLowerCase() : 'default';
+          const templateComponent = DEFAULT_HIT_TEMPLATES[name];
+          const hitComponent = templateComponent || DEFAULT_HIT_TEMPLATES.DEFAULT;
+          const templateKey = templateComponent ? name.toLowerCase() : 'default';
           const templateTranslationKey = (name || 'default').toLowerCase();
           const templateTitle =
-            translations.hitTemplates && translations.hitTemplates[templateTranslationKey]
-              ? translations.hitTemplates[templateTranslationKey]
-              : `${name.charAt(0)}${name.slice(1).toLowerCase()}`;
+            translations.hitTemplates?.[templateTranslationKey] ||
+            `${name.charAt(0)}${name.slice(1).toLowerCase()}`;
 
           return (
             <Index indexName={alias} key={alias}>

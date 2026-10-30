@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'preact/hooks';
-import afostoInstantSearch from '@afosto/instant-search-client';
+import { afostoInstantSearch } from '@afosto/instant-search-client';
 import formatSettings from '../utils/formatSettings';
 
 const useClientSetup = key => {
@@ -12,7 +12,7 @@ const useClientSetup = key => {
       setIsFetchingSettings(true);
       const clientSettings = await client.getSettings();
       setSettings(formatSettings(clientSettings));
-    } catch (error) {
+    } catch {
       setSettings({});
     } finally {
       setIsFetchingSettings(false);

@@ -2,13 +2,9 @@ const formatSettings = settings => {
   const indexes = (settings?.indexes || []).map(index => ({
     ...index,
     template: {
-      ...(index.template || {}),
-      mapping: (index.template?.mapping || []).reduce(
-        (acc, mapping) => ({
-          ...acc,
-          [mapping.to]: mapping.from,
-        }),
-        {},
+      ...index.template,
+      mapping: Object.fromEntries(
+        (index.template?.mapping || []).map(mapping => [mapping.to, mapping.from]),
       ),
       _rawMapping: index.template?.mapping || [],
     },
