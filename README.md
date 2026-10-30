@@ -15,9 +15,12 @@ This library is an Afosto instant search javascript widget. With this widget you
 
 ## Installation
 
-### Yarn / NPM
+### pnpm / Yarn / NPM
 
 ```sh
+# Install with pnpm
+pnpm add @afosto/instant-search-widget
+
 # Install with Yarn
 yarn add @afosto/instant-search-widget
 
