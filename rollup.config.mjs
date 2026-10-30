@@ -1,5 +1,8 @@
 import { readFileSync } from 'node:fs';
+import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { gzipSync } from 'node:zlib';
 import cssnano from 'cssnano';
 import postcss from 'postcss';
 import prettier from 'prettier';
@@ -9,9 +12,7 @@ import alias from '@rollup/plugin-alias';
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
-import copy from 'rollup-plugin-copy';
 import terser from '@rollup/plugin-terser';
-import filesize from 'rollup-plugin-filesize';
 import prettierConfig from './prettier.config.js';
 
 const packageJson = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8'));
@@ -67,6 +68,39 @@ const scss = ({ fileName } = {}) => ({
   },
 });
 
+/**
+ * Copies the locale files from src/i18n to dest, optionally transforming each file's contents.
+ */
+const copyI18n = ({ dest, transform = content => content }) => ({
+  name: 'copy-i18n',
+  async buildEnd() {
+    await mkdir(dest, { recursive: true });
+    for (const fileName of await readdir('src/i18n')) {
+      const content = await readFile(join('src/i18n', fileName), 'utf8');
+      await writeFile(join(dest, fileName), transform(content, fileName));
+    }
+  },
+});
+
+/**
+ * Prints the size of each written chunk, minified and gzipped.
+ */
+const reportSize = () => ({
+  name: 'report-size',
+  writeBundle(options, bundle) {
+    for (const chunk of Object.values(bundle)) {
+      if (chunk.type === 'chunk') {
+        const kilobytes = bytes => `${(bytes / 1024).toFixed(2)} KB`;
+        this.info(
+          `${chunk.fileName}: ${kilobytes(Buffer.byteLength(chunk.code))}, gzipped ${kilobytes(
+            gzipSync(chunk.code).length,
+          )}`,
+        );
+      }
+    }
+  },
+});
+
 const prettierOptions = {
   ...prettierConfig,
   parser: 'babel',
@@ -97,31 +131,25 @@ export default [
         exclude: 'src/**',
       }),
       terser(),
-      copy({
-        targets: [
-          {
-            src: 'src/i18n/**/*',
-            dest: 'dist/i18n',
-            transform(content, filename) {
-              const locale = filename.replace('.js', '');
-              const messages = content
-                .toString()
-                .replace('export default messages;', '')
-                .replace('};', '}')
-                .replace('const messages = ', '');
+      copyI18n({
+        dest: 'dist/i18n',
+        transform(content, filename) {
+          const locale = filename.replace('.js', '');
+          const messages = content
+            .replace('export default messages;', '')
+            .replace('};', '}')
+            .replace('const messages = ', '');
 
-              return prettier.format(
-                `
-                  // Load this after the AfostoInstantSearchWidget
-                  AfostoInstantSearchWidget.addMessages('${locale}', ${messages});
+          return prettier.format(
+            `
+              // Load this after the AfostoInstantSearchWidget
+              AfostoInstantSearchWidget.addMessages('${locale}', ${messages});
             `,
-                prettierOptions,
-              );
-            },
-          },
-        ],
+            prettierOptions,
+          );
+        },
       }),
-      filesize(),
+      reportSize(),
     ],
     output: {
       file: `dist/afosto-instant-search-widget.min.js`,
@@ -154,9 +182,7 @@ export default [
         exclude: /node_modules/,
       }),
       scss(),
-      copy({
-        targets: [{ src: 'src/i18n/**/*', dest: 'i18n' }],
-      }),
+      copyI18n({ dest: 'i18n' }),
     ],
     output: [
       {
