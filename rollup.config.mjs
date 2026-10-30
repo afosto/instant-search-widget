@@ -1,4 +1,5 @@
-import { resolve } from 'path';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import prettier from 'prettier';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import alias from '@rollup/plugin-alias';
@@ -9,8 +10,9 @@ import copy from 'rollup-plugin-copy';
 import postcss from 'rollup-plugin-postcss';
 import terser from '@rollup/plugin-terser';
 import filesize from 'rollup-plugin-filesize';
-import * as prettierConfig from './prettier.config';
-import packageJson from './package.json';
+import prettierConfig from './prettier.config.js';
+
+const packageJson = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8'));
 
 const INPUT = 'src/index.js';
 
@@ -44,7 +46,7 @@ const prettierOptions = {
   parser: 'babel',
 };
 
-module.exports = [
+export default [
   {
     input: INPUT,
     plugins: [

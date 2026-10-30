@@ -12,7 +12,7 @@ export default [
       'i18n/**',
       'node_modules/**',
       'tmp/**',
-      'rollup.config.js',
+      'rollup.config.mjs',
       'lintstaged.config.js',
       'prettier.config.js',
     ],
