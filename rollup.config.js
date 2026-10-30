@@ -7,7 +7,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import copy from 'rollup-plugin-copy';
 import postcss from 'rollup-plugin-postcss';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 import filesize from 'rollup-plugin-filesize';
 import * as prettierConfig from './prettier.config';
 import packageJson from './package.json';

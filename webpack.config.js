@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin  = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const environment = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
@@ -15,6 +14,7 @@ module.exports = {
     library: 'AfostoInstantSearchWidget',
     libraryExport: 'default',
     globalObject: 'window',
+    clean: true,
   },
   optimization: {
     minimize: environment === 'production',
@@ -56,7 +56,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
