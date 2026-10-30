@@ -40,6 +40,7 @@
     "type": "git",
     "url": "https://github.com/afosto/instant-search-widget.git"
   },
+  "packageManager": "pnpm@11.0.8",
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "@babel/plugin-transform-react-jsx": "^7.17.3",
