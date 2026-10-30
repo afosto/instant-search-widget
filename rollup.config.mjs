@@ -1,13 +1,15 @@
 import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import cssnano from 'cssnano';
+import postcss from 'postcss';
 import prettier from 'prettier';
+import * as sass from 'sass';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import alias from '@rollup/plugin-alias';
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import copy from 'rollup-plugin-copy';
-import postcss from 'rollup-plugin-postcss';
 import terser from '@rollup/plugin-terser';
 import filesize from 'rollup-plugin-filesize';
 import prettierConfig from './prettier.config.js';
@@ -41,6 +43,30 @@ const defaultPlugins = [
   }),
 ];
 
+/**
+ * Compiles imported .scss files with Sass and minifies them with cssnano. With a fileName the
+ * stylesheet is emitted as that asset; without one the import is dropped from the bundle.
+ */
+const scss = ({ fileName } = {}) => ({
+  name: 'scss',
+  async load(id) {
+    if (!id.endsWith('.scss')) {
+      return null;
+    }
+
+    if (fileName) {
+      const { css, loadedUrls } = sass.compile(id);
+      for (const url of loadedUrls) {
+        this.addWatchFile(fileURLToPath(url));
+      }
+      const result = await postcss([cssnano()]).process(css, { from: id });
+      this.emitFile({ type: 'asset', fileName, source: result.css });
+    }
+
+    return { code: '', moduleSideEffects: false };
+  },
+});
+
 const prettierOptions = {
   ...prettierConfig,
   parser: 'babel',
@@ -66,11 +92,7 @@ export default [
       nodeResolve({
         browser: true,
       }),
-      postcss({
-        plugins: [],
-        extract: resolve('dist/afosto-instant-search-widget.min.css'),
-        minimize: true,
-      }),
+      scss({ fileName: 'afosto-instant-search-widget.min.css' }),
       commonjs({
         exclude: 'src/**',
       }),
@@ -131,10 +153,7 @@ export default [
         babelHelpers: 'bundled',
         exclude: /node_modules/,
       }),
-      postcss({
-        plugins: [],
-        inject: false,
-      }),
+      scss(),
       copy({
         targets: [{ src: 'src/i18n/**/*', dest: 'i18n' }],
       }),
