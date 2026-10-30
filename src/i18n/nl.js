@@ -11,7 +11,7 @@ const messages = {
   hitTemplates: {
     default: 'Standaard',
     products: 'Producten',
-    pages: 'Pagina\'s',
+    pages: "Pagina's",
   },
   hitsPerPage: {
     optionsLabel: '{value} resultaten',

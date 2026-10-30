@@ -40,14 +40,14 @@ const Filters = () => {
           const header = filter.label || filter.key;
 
           switch (filter.type) {
-            case 'NUMBER':
+            case 'NUMBER': {
               return (
                 <Panel key={filter.key} header={header}>
                   <RangeSlider attribute={filter.key} />
                 </Panel>
               );
-            case 'STRING':
-            default:
+            }
+            default: {
               return (
                 <Panel key={filter.key} header={header}>
                   <RefinementList
@@ -64,6 +64,7 @@ const Filters = () => {
                   />
                 </Panel>
               );
+            }
           }
         })}
       </DynamicWidgets>

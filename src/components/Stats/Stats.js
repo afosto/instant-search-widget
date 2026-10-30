@@ -9,7 +9,8 @@ const Stats = () => {
     <div className="af-is-widget__stats">
       <AisStats
         translations={{
-          stats: nbHits => translations.stats.resultsLabel.replace('{value}', nbHits.toLocaleString())
+          stats: nbHits =>
+            translations.stats.resultsLabel.replace('{value}', () => nbHits.toLocaleString()),
         }}
       />
     </div>

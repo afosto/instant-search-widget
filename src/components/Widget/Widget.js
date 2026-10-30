@@ -33,8 +33,8 @@ const Widget = ({ config, locale, searchKey, translations }) => {
   }, []);
 
   const handleVisibilityEvent = useCallback(event => {
-    const visible = !!event?.detail?.show;
-    setOpen(visible);
+    const isVisible = !!event?.detail?.show;
+    setOpen(isVisible);
   }, []);
 
   useVisibilityListener(handleVisibilityEvent);

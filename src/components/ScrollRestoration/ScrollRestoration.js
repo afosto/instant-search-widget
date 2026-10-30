@@ -8,7 +8,7 @@ const ScrollRestoration = ({ children, value, hasNotChanged }) => {
   const prevProps = usePrevious({ value, hasNotChanged });
 
   useEffect(() => {
-    if (value !== prevProps?.value && hasNotChanged) {
+    if (hasNotChanged && value !== prevProps?.value) {
       elementRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   });

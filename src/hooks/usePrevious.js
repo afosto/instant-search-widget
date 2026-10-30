@@ -7,6 +7,8 @@ const usePrevious = value => {
     ref.current = value;
   });
 
+  // Reading the ref during render is the point of this hook: it returns the value from the previous render.
+  // eslint-disable-next-line react-hooks/refs
   return ref.current;
 };
 

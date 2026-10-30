@@ -3,6 +3,19 @@ import merge from 'lodash.merge';
 import Widget from './components/Widget';
 import { DEFAULT_LOCALE, DEFAULT_TRANSLATIONS, EVENT_KEY_WIDGET_VISIBILITY } from './constants';
 
+const changeWidgetVisibility = show => {
+  const event = new CustomEvent(EVENT_KEY_WIDGET_VISIBILITY, { detail: { show } });
+  document.dispatchEvent(event);
+};
+
+const hide = () => {
+  changeWidgetVisibility(false);
+};
+
+const show = () => {
+  changeWidgetVisibility(true);
+};
+
 const AfostoInstantSearchWidget = () => {
   let isInitialized = false;
   let props = {
@@ -12,25 +25,12 @@ const AfostoInstantSearchWidget = () => {
   };
   const translationMessages = {};
 
-  const changeWidgetVisibility = show => {
-    const event = new CustomEvent(EVENT_KEY_WIDGET_VISIBILITY, { detail: { show } });
-    document.dispatchEvent(event);
-  };
-
-  const hide = () => {
-    changeWidgetVisibility(false);
-  };
-
-  const show = () => {
-    changeWidgetVisibility(true);
-  };
-
   const destroy = () => {
     const elements = [...document.querySelectorAll('[data-af-instant-search]')];
 
-    elements.forEach(element => {
+    for (const element of elements) {
       element.removeEventListener('click', show);
-    });
+    }
 
     render(null, document.body);
   };
@@ -38,9 +38,9 @@ const AfostoInstantSearchWidget = () => {
   const initClickListeners = () => {
     const elements = [...document.querySelectorAll('[data-af-instant-search]')];
 
-    elements.forEach(element => {
+    for (const element of elements) {
       element.addEventListener('click', show);
-    });
+    }
   };
 
   const renderWidget = () => {

@@ -14,7 +14,7 @@ const HitsPerPage = () => {
       <AisHitsPerPage
         items={DEFAULT_HITS_PER_PAGE_OPTIONS.map(option => ({
           value: option,
-          label: translations.hitsPerPage.optionsLabel.replace('{value}', option)
+          label: translations.hitsPerPage.optionsLabel.replace('{value}', () => option),
         }))}
         defaultRefinement={mainIndex?.results_per_page || DEFAULT_HITS_PER_PAGE}
       />
