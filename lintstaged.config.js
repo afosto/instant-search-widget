@@ -1,3 +1,3 @@
 module.exports = {
-  '*.js': ['eslint ./src --ext .js --max-warnings=0', 'prettier --write'],
+  '*.js': ['eslint ./src --max-warnings=0', 'prettier --write'],
 };
