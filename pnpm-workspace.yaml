@@ -1,0 +1,8 @@
+# Install scripts of dependencies are blocked by default; none of these needs one.
+allowBuilds:
+  # Native binding comes prebuilt via @parcel/watcher-<platform>.
+  '@parcel/watcher': false
+  # Postinstall only prints a funding banner.
+  core-js: false
+  # Native binding comes prebuilt via @unrs/resolver-binding-<platform>.
+  unrs-resolver: false
